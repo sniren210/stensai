@@ -33,39 +33,66 @@
               <h3 class="card-title">Pengajuan</h3>
             </div>
             <!-- /.card-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Nama Siswa</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">NIS</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label>Jenis Pengajuan</label>
-                  <select class="custom-select">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Pengajuan</label>
-                  <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                </div>
-              </div>
-              <!-- /.card-body -->
+             <!-- /.card-header -->
+             @if (session('status'))
+             <div class="content">
+               <div class="alert alert-success" style="color: #155724; background-color: #d4edda;border-color: #c3e6cb;">
+                 {{ session('status') }}
+               </div>
+             </div>
+           @endif
+           <!-- form start -->
+           <form method="POST" action="/peran/pengajuan">
+             @csrf
+             @method('post')
+             <div class="card-body">
+               <div class="form-group">
+                 <label for="exampleInputEmail1">Nama Siswa</label>
+                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="exampleInputEmail1" name="nama" value="{{old('nama')}} ">
+                 @error('nama')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+               </div>
+               <div class="form-group">
+                 <label for="exampleInputEmail1">NIS</label>
+                 <input type="text" class="form-control @error('nis') is-invalid @enderror" id="exampleInputEmail1" name="nis" value="{{old('nis')}} ">
+                 @error('nis')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+               </div>
+               <div class="form-group">
+                 <label>Pengajuan</label>
+                 <select class="custom-select @error('pengajuan') is-invalid @enderror" name="pengajuan">
+                       <option value="Fasilitas Bengkel">Fasilitas Bengkel</option>
+                       <option value="Fasilitas Umum">Fasilitas Umum</option>
+                       <option value="Fasilitas Perpustakaan">Fasilitas Perpustakaan</option>
+                 </select>
+                 @error('pengajuan')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+               </div>
+               <div class="form-group">
+                 <label>Saran</label>
+                 <textarea class="form-control @error('deskripsi') is-invalid @enderror" rows="3" placeholder="Enter ..." name="deskripsi">{{old('deskripsi')}}</textarea>
+                 @error('deskripsi')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+               </div>
+             </div>
+             <!-- /.card-body -->
 
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
+             <div class="card-footer">
+               <button type="submit" class="btn btn-primary">Submit</button>
+             </div>
+           </form>
           </div>
           <!-- /.card -->
 

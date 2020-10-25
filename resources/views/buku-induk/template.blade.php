@@ -26,7 +26,7 @@
           <a href="{{ url('/sekolah') }}" class="nav-link">Profile Sekolah</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/kelas') }}" class="nav-link">Kelas dan Jurusan</a>
+          <a href="{{ url('/kelas-jurusan') }}" class="nav-link">Kelas dan Jurusan</a>
         </li>
         <li class="nav-item">
           <a href="{{ url('/ruang/home') }}" class="nav-link">Ruang</a>

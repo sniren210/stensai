@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class JurusanSeeder extends Seeder
 {
@@ -15,11 +16,13 @@ class JurusanSeeder extends Seeder
         DB::table('jurusan')->insert(array(
             [
             'nama' => 'Rekayasa Perangkat Lunak',
-            'singkatan' => 'RPL'
+            'singkatan' => 'RPL',
+            'sub_nama' => 'A'
             ],
            [
             'nama' => 'Teknik Komputer Jaringan',
-            'singkatan' => 'TKJ'
+            'singkatan' => 'TKJ',
+            'sub_nama' => 'A'
             ],
         ));
     }

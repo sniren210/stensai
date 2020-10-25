@@ -15,11 +15,13 @@
     <tr>
       <th align="left">Nama</th>
       <th align="left">Jurusan</th>
+      <th align="left">Kelas</th>
     </tr>
     @foreach ($siswa as $data)
     <tr>
       <td>{{$data->nama}} </td>
-      <td>{{$data->jurusan->nama}} </td>
+      <td>{{$data->kelas->jurusan->nama}} </td>
+      <td>{{$data->kelas->kelas}} </td>
     </tr>
     @endforeach
   </table>
@@ -66,7 +68,7 @@
     @endforeach
   </table>
   
-  <h3>Kelas</h3>
+  <h3>Jadwal Kelas</h3>
   <table border="1">
     <tr>
       <th align="left">kelas</th>
@@ -128,6 +130,73 @@
       <td>{{$data->siswa->nama}} </td>
       <td>{{$data->event->nama}} </td>
       <td>{{$data->deskripsi}} </td>
+    </tr>
+    @endforeach
+  </table>
+
+
+  <h3>Jadwal Guru</h3>
+  <table border="1">
+    <tr>
+      <th align="left">nama guru</th>
+      <th align="left">Jadwal</th>
+      <th align="left">Jam Ke</th>
+    </tr>
+    @foreach ($jadwal_guru as $data)
+    <tr>
+      <td>{{$data->guru->nama}} </td>
+      <td>{{$data->mapel->nama}} </td>
+      <td>{{$data->jam_ke}} </td>
+    </tr>
+    @endforeach
+  </table>
+
+  <h3>Jadwal Guru Pertama</h3>
+  <table border="1">
+    <tr>
+      <th align="left">nama guru</th>
+      <th align="left">Jadwal</th>
+      <th align="left">Jam Ke</th>
+    </tr>
+    @foreach ($jadwal_first as $data)
+    <tr>
+      <td>{{$data->guru->nama}}</td>
+      <td>{{$data->mapel->nama}} </td>
+      <td>{{$data->jam_ke}} </td>
+    </tr>
+    @endforeach
+  </table>
+
+  {{-- {{dd($kelas_first)}} --}}
+  <h3>Jadwal Kelas {{$kelas_first->kelas->kelas}} Jurusan {{$kelas_first->jurusan->singkatan}} </h3>
+  <table border="1">
+    <tr>
+      <th align="left">Kelas</th>
+      <th align="left">Jadwal</th>
+      <th align="left">Jam Ke</th>
+    </tr>
+    @foreach ($jadwal_kelas_first as $data)
+    <tr>
+      <td>{{$data->kelas->kelas}} {{$data->jurusan->singkatan}}</td>
+      <td>{{$data->mapel->nama}} </td>
+      <td>{{$data->jam_ke}} </td>
+    </tr>
+    @endforeach
+  </table>
+  
+  <h3>Kelas</h3>
+  <table border="1">
+    <tr>
+      <th align="left">Kelas</th>
+      <th align="left">Sub Kelas</th>
+    </tr>
+    @foreach ($kelas as $data)
+    {{-- {{dd($data->jurusan)}} --}}
+    <tr>
+      {{-- {{dd($data->jurusan->nama)}} --}}
+      <td>{{$data->kelas}} </td>
+      <td>{{$data->sub_kelas}} </td>
+      <td>{{$data->jurusan->nama}} </td>
     </tr>
     @endforeach
   </table>

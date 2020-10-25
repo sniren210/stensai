@@ -29,7 +29,7 @@ class JurusanController extends Controller
             'jurusan' => jurusan::all()
         ];
         //
-        return view('buku-induk.kelas-jurusan.jurusan',$data);
+        return view('buku-induk.jurusan.jurusan',$data);
 
     }
 
@@ -41,7 +41,7 @@ class JurusanController extends Controller
     public function create()
     {
         //
-        return view('buku-induk.kelas-jurusan.tambah');
+        return view('buku-induk.jurusan.tambah');
 
     }
 
@@ -71,20 +71,7 @@ class JurusanController extends Controller
      * @param  \App\jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function show(jurusan $jurusan)
-    {
-        //
-        return view('buku-induk.kelas-jurusan.detail');
 
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\jurusan  $jurusan
-     * @return \Illuminate\Http\Response
-     */
     public function edit(jurusan $jurusan)
     {
         //
@@ -92,7 +79,7 @@ class JurusanController extends Controller
             'jurusan' => $jurusan
         ];
 
-        return view('buku-induk.kelas-jurusan.edit',$data);
+        return view('buku-induk.jurusan.edit',$data);
 
     }
 

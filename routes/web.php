@@ -39,6 +39,9 @@ Route::get('/buku-induk', 'HomeController@bukuInduk');
 Route::get('/buku-induk/siswa/home', 'SiswaController@home');
 Route::get('/buku-induk/siswa/selengkapnya/{siswa}', 'SiswaController@selengkapnya');
 
+// nilai siswa
+Route::get('/buku-induk/nilai/{nilai_siswa}', 'NilaiSiswaController@nilai');
+
 // buku induk guru
 Route::get('/buku-induk/guru/home', 'GuruController@home');
 Route::get('/buku-induk/guru/selengkapnya/{guru}', 'GuruController@selengkapnya');
@@ -47,8 +50,8 @@ Route::get('/buku-induk/guru/selengkapnya/{guru}', 'GuruController@selengkapnya'
 Route::get('/ruang/home', 'RuangController@home');
 
 // kelas dan jurusan
-Route::get('/kelas', 'KelasController@index');
-Route::get('/kelas/{kelas}/{jurusan}', 'KelasController@show');
+Route::get('/kelas-jurusan', 'KelasController@kelas_jurusan');
+Route::get('/lihat-kelas/{kelas}', 'KelasController@lihat_siswa');
 
 // sekolah
 Route::get('/sekolah','SekolahController@index');
@@ -59,7 +62,15 @@ Route::get('/jadwal/home', 'HomeController@jadwal');
 
 // jadwal kelas
 Route::get('/jadwal-kelas/home', 'JadwalKelasController@home');
-Route::get('/jadwal-kelas/jadwal', 'JadwalKelasController@jadwal');
+Route::get('/jadwal-kelas/jadwal/{jadwal_kelas}', 'JadwalKelasController@jadwal');
+
+// jadwal guru
+Route::get('/jadwal-guru/home', 'JadwalGuruController@home');
+Route::get('/jadwal-guru/jadwal/{jadwal_guru}', 'JadwalGuruController@jadwal');
+
+// jadwal ruang
+Route::get('/jadwal-ruang/home', 'JadwalRuangController@home');
+Route::get('/jadwal-ruang/jadwal/{jadwal_ruang}', 'JadwalRuangController@jadwal');
 
 // Auth::routes();
 Auth::routes(['register' => false]);
@@ -89,6 +100,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/profile/{user}', 'Admin\ProfileController@update');
         Route::get('/profile/change-password', 'Admin\ProfileController@ubah');
         Route::put('/profile/change-password/{user}', 'Admin\ProfileController@change');
+
+        // api tokens 
+        // Route::get('/api-tokens', 'Admin\APIController@index');
+        // Route::post('/api-tokens', 'Admin\APIController@post');
     });
     
     // mading
@@ -112,7 +127,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/buku-induk/guru', 'GuruController');
     
     // jurusan
-    Route::resource('jurusan', 'JurusanController');
+    Route::resource('jurusan', 'JurusanController', [
+        'except' => ['show']
+    ]);
 
     // ruang
     Route::resource('/ruang', 'RuangController', [
@@ -126,4 +143,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     // jadwal kelas
     Route::resource('jadwal-kelas', 'JadwalKelasController');
+    Route::resource('jadwal-guru', 'JadwalGuruController');
+    Route::resource('jadwal-ruang', 'JadwalRuangController');
+
+    // nilai siswa
+    Route::resource('/buku-induk/nilai-siswa', 'NilaiSiswaController');
+    
+    // kelas
+    Route::resource('/kelas', 'KelasController');
 });

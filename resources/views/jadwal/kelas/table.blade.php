@@ -30,6 +30,14 @@
       </div><!-- /.container-fluid -->
     </section>
 
+    @if (session('status'))
+      <div class="content">
+        <div class="alert alert-success" style="color: #155724; background-color: #d4edda;border-color: #c3e6cb;">
+          {{ session('status') }}
+        </div>
+      </div>
+    @endif
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -37,7 +45,7 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/jadwal-kelas/tambah') }}" class="btn btn-primary">Tambah</a>
+              <a href="{{ url('/jadwal-kelas/create') }}" class="btn btn-primary">Tambah</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -51,18 +59,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>WIn</td>
-                  <td>
-                    <a href="{{ url('/jadwal-kelas/jadwal') }}" class="badge badge-primary">Jadwal</a>
-                    <a href="{{ url('/jadwal-kelas/edit') }}" class="badge badge-success">Edit</a>
-                    <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#exampleModal">Hapus</button>
-                  </td>
-                </tr>
+                  @foreach ($kelas as $data)
+                  <tr>
+                    <td>{{$loop->iteration}} </td>
+                    <td>{{$data->kelas}} </td>
+                    <td>{{$data->jurusan->nama}} </td>
+                    <td>
+                      <a href="{{ url('/jadwal-kelas/'.$data->id) }}" class="badge badge-primary">Jadwal</a>
+                    </td>
+                  </tr>
+                  @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
@@ -85,25 +91,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Hapus Data</button>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection

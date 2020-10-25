@@ -9,7 +9,7 @@ class kelas extends Model
     //
     protected $table = 'kelas';
 
-    protected $fillable = ['kelas','sub_kelas'];
+    protected $fillable = ['kelas','sub_kelas','jurusan_id'];
 
     public function siswa()
     {
@@ -21,6 +21,7 @@ class kelas extends Model
         return $this->belongsToMany('App\guru', 'wali_kelas');
     }
 
+    
     // public function mapel()
     // {
     //     return $this->belongsToMany('App\mapel', 'jadwal_kelas');
@@ -29,5 +30,10 @@ class kelas extends Model
     public function jadwal_kelas()
     {
         return $this->hasMany('App\jadwal_kelas', 'kelas_id');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo('App\jurusan', 'jurusan_id');
     }
 }

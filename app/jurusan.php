@@ -15,4 +15,10 @@ class jurusan extends Model
     {
         return $this->hasMany('App\siswa', 'jurusan_id');
     }
+    
+    // public function jurusan()
+    // {
+    //     return $this->hasMany('App\jurusan', 'jurusan_id');
+    // }
+
 }

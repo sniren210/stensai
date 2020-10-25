@@ -22,7 +22,6 @@ class siswa extends Model
         'alamat',
         'nama_ayah',
         'nama_ibu',
-        'jurusan_id',
         'kelas_id',
     ];
 

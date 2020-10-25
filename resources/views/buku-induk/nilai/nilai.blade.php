@@ -1,4 +1,4 @@
-@extends('jadwal.template')
+@extends('buku-induk.template')
 
 @section('template')
     <!-- Content Wrapper. Contains page content -->
@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Detail Jadwal ...</h1>
+            <h1>Nilai Siswa</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Detail Jadwal</h3>
+                <h3 class="card-title">Nilai Siswa {{$siswa->siswa->nama}} </h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -44,17 +44,19 @@
                 <table class="table table-bordered">
                   <thead>                  
                     <tr>
-                      <th style="width: 10px">Jam ke</th>
-                      <th>Hari</th>
-                      <th>Pelajaran</th>
+                      <th style="width: 10px">#</th>
+                      <th>Mapel</th>
+                      <th>Nilai</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($nilai as $data)                        
                     <tr>
-                      <td>1</td>
-                      <td>Senin</td>
-                      <td>Rekayasa Perangkat Lunak</td>
+                      <td>{{$loop->iteration}} </td>
+                      <td>{{$data->mapel->nama}} </td>
+                      <td>{{$data->nilai}} </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

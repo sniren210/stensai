@@ -16,19 +16,14 @@
         <li class="nav-item">
           <a href="{{ url('/jadwal') }}" class="nav-link">Home</a>
         </li>
-        <li class="nav-item dropdown">
-          <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Jadwal Kelas</a>
-          <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-            <li><a href="{{ url('/jadwal-kelas/home') }}" class="dropdown-item">X</a></li>
-            <li><a href="{{ url('/jadwal-kelas/home') }}" class="dropdown-item">XI</a></li>
-            <li><a href="{{ url('/jadwal-kelas/home') }}" class="dropdown-item">XII</a></li>
-          </ul>
+        <li class="nav-item">
+          <a href="{{ url('/jadwal-kelas/home') }}" class="nav-link">Jadwal kelas</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/mading') }}" class="nav-link">Jadwal Guru</a>
+          <a href="{{ url('/jadwal-guru/home') }}" class="nav-link">Jadwal Guru</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/mading') }}" class="nav-link">Jadwal Ruang</a>
+          <a href="{{ url('/jadwal-ruang/home') }}" class="nav-link">Jadwal Ruang</a>
         </li>
       </ul>
     </div>

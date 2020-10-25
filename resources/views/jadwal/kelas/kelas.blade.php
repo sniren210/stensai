@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jadwal Kelas X</h1>
+            <h1>Jadwal Kelas</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -51,12 +51,14 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($kelas as $data)                        
                     <tr>
-                      <td>1</td>
-                      <td>X</td>
-                      <td>Rekayasa Perangkat Lunak</td>
-                      <td><a href="{{ url('/jadwal/detail', []) }}" class="badge bg-info">Lihat</a></td>
+                      <td>{{$loop->iteration}} </td>
+                      <td>{{$data->kelas}} </td>
+                      <td>{{$data->jurusan->singkatan}} </td>
+                      <td><a href="{{ url('/jadwal-kelas/jadwal/'.$data->id) }}" class="badge bg-info">Lihat Jadwal</a></td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

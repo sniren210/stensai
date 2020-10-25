@@ -13,7 +13,7 @@ class PengajuanSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('saran')->insert(array(
+        DB::table('pengajuan')->insert(array(
             [
                 'siswa_id' => 1,
                 'pengajuan' => 'Fasilitas Bengkel',

@@ -17,6 +17,7 @@ class CreateJurusansTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('singkatan');
+            $table->string('sub_nama');
             $table->timestamps();
         });
     }

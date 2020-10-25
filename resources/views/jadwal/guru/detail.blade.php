@@ -1,4 +1,4 @@
-@extends('buku-induk.template')
+@extends('jadwal.template')
 
 @section('template')
     <!-- Content Wrapper. Contains page content -->
@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Kelas dan Jurusan</h1>
+            <h1>Detail Jadwal Guru {{$guru->nama}} </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Kelas dan Jurusan</h3>
+                <h3 class="card-title">Detail Jadwal</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -44,19 +44,19 @@
                 <table class="table table-bordered">
                   <thead>                  
                     <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Kelas</th>
-                      <th>Jurusan</th>
-                      <th style="width: 15%">Aksi</th>
+                      <th style="width: 10px">Jam ke</th>
+                      <th>Hari</th>
+                      <th>Pelajaran</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($jadwal as $data)                        
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>6969696969</td>
-                      <td><a href="{{ url('/kelas/1/2') }}" class="badge bg-info">Lihat Siswa</a></td>
+                      <td>{{$data->jam_ke}} </td>
+                      <td>Senin</td>
+                      <td>{{$data->mapel->nama}} </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

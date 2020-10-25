@@ -7,16 +7,33 @@ use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
 {
+    protected $messages = [
+        'required' => 'Form harus di isi',
+        'email' => 'Harus di isi email',
+        'image' => 'file harus gambar',
+        'mimes' => 'file harus jpeg,jpg,png',
+        'file' => 'harus input file',
+        'confirmed' => 'password tidak cocok',
+        'unique' => 'sudah ada'
+    ];
+    protected $validasi = [
+        'nama' => ['required', 'string', 'max:255'],
+        'nis' => ['required', 'string', 'max:255'],
+        'pengajuan' => ['required', 'string', 'max:255'],
+        'deskripsi' => ['required', 'string', 'min:8'],
+    ];
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-        return view('peran.table-pengajuan');
+    {  
+        $data = [
+            'pengajuan'  => pengajuan::all()
+        ];
 
+        return view('peran.table-pengajuan',$data);
     }
 
     /**
@@ -26,9 +43,7 @@ class PengajuanController extends Controller
      */
     public function create()
     {
-        //
         return view('peran.pengajuan');
-        
     }
 
     /**
@@ -39,41 +54,16 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // $data = siswa::all();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\pengajuan  $pengajuan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(pengajuan $pengajuan)
-    {
-        //
-    }
+        $request->validate($this->validasi,$this->messages);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\pengajuan  $pengajuan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(pengajuan $pengajuan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\pengajuan  $pengajuan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, pengajuan $pengajuan)
-    {
-        //
+        pengajuan::create( [
+            'siswa_id' => 1,
+            'pengajuan' => $request->pengajuan,
+            'deskripsi' => $request->deskripsi
+        ]);
+        return redirect('peran/pengajuan')->with('status', 'pengajuan berhasil ditambahkan.');
     }
 
     /**

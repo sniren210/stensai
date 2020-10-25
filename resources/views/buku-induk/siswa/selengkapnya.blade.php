@@ -48,7 +48,8 @@
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Lihat Nilai</b></a>
+                <a href="{{ url('/buku-induk/nilai/'.$siswa->id) }}" class="btn btn-primary btn-block"><b>Lihat Nilai</b></a>
+
               </div>
               <!-- /.card-body -->
             </div>

@@ -2,21 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\mapel;
 use App\nilai_siswa;
+use App\siswa;
 use Illuminate\Http\Request;
 
 class NilaiSiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $messages = [
+        'required' => 'Form harus di isi',
+        'email' => 'Harus di isi email',
+        'image' => 'file harus gambar',
+        'mimes' => 'file harus jpeg,jpg,png',
+        'file' => 'harus input file',
+        'confirmed' => 'password tidak cocok',
+        'unique' => 'sudah ada',
+        'date' => 'tanggal  harus format YY/MM/DD',
+        'numeric' => 'harus di isi angka'
+    ];
+    protected $validasi = [
+        'mapel' => ['required', 'max:255'],
+        'siswa' => ['required', 'max:255'],
+        'nilai' => ['required','numeric', 'max:255'],
+        // 'foto' => 'required|file|image|mimes:jpeg,png,jpg'
+    ];
+
     public function index()
     {
-        //
+        $data = [
+            'siswa' => siswa::all()
+        ];
+
+        return view('buku-induk.nilai.table',$data);
     }
 
+    public function nilai( $nilai)
+    {
+        $data = [
+            'nilai' => nilai_siswa::where('siswa_id',$nilai)->get(),
+            'siswa' => nilai_siswa::where('siswa_id',$nilai)->first()
+        ];
+
+        return view('buku-induk.nilai.nilai',$data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +52,13 @@ class NilaiSiswaController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'siswa' => siswa::all(),
+            'mapel' =>  mapel::all()
+        ];
+
+
+        return view('buku-induk.nilai.tambah',$data);
     }
 
     /**
@@ -35,7 +69,15 @@ class NilaiSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validasi,$this->messages);
+
+        nilai_siswa::create([
+            'mapel_id' => $request->mapel,
+            'siswa_id' => $request->siswa,
+            'nilai' => $request->nilai
+        ]);
+
+        return redirect('buku-induk/nilai-siswa')->with('status', 'Nilai Siswa berhasil ditambahkan.');
     }
 
     /**
@@ -44,9 +86,14 @@ class NilaiSiswaController extends Controller
      * @param  \App\nilai_siswa  $nilai_siswa
      * @return \Illuminate\Http\Response
      */
-    public function show(nilai_siswa $nilai_siswa)
+    public function show($nilai_siswa)
     {
-        //
+        $data = [
+            'nilai' =>  nilai_siswa::where('siswa_id',$nilai_siswa)->get(),
+            'siswa' =>  nilai_siswa::where('siswa_id',$nilai_siswa)->first(),
+        ];
+
+        return view('buku-induk.nilai.detail',$data);
     }
 
     /**
@@ -58,6 +105,13 @@ class NilaiSiswaController extends Controller
     public function edit(nilai_siswa $nilai_siswa)
     {
         //
+        $data = [
+            'nilai' => $nilai_siswa,
+            'siswa' => siswa::all(),
+            'mapel' =>  mapel::all()
+        ];
+
+        return view('buku-induk.nilai.edit',$data);
     }
 
     /**
@@ -69,7 +123,18 @@ class NilaiSiswaController extends Controller
      */
     public function update(Request $request, nilai_siswa $nilai_siswa)
     {
+        $data = $nilai_siswa;
         //
+        $request->validate($this->validasi,$this->messages);
+
+        nilai_siswa::where('id',$data->id)->update([
+            'mapel_id' => $request->mapel,
+            'siswa_id' => $request->siswa,
+            'nilai' => $request->nilai
+        ]);
+
+        return redirect('buku-induk/nilai-siswa/'.$data->siswa_id)->with('status', 'Nilai Siswa berhasil di ubah.');
+
     }
 
     /**
@@ -80,6 +145,8 @@ class NilaiSiswaController extends Controller
      */
     public function destroy(nilai_siswa $nilai_siswa)
     {
-        //
+        nilai_siswa::destroy($nilai_siswa->id);
+
+        return redirect('buku-induk/nilai-siswa/'.$nilai_siswa->guru_id)->with('status', 'Jadwal Nilai berhasil dihapus.');
     }
 }

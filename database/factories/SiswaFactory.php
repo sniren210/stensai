@@ -32,7 +32,6 @@ $factory->define(siswa::class, function (Faker $faker) {
         'alamat' => $this->faker->address,
         'nama_ayah' => $this->faker->name($gender = 'male'),
         'nama_ibu' => $this->faker->name($gender = 'female'),
-        'jurusan_id' => 1,
         'kelas_id' => 1,
     ];
 });

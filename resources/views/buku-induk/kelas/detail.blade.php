@@ -18,7 +18,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>jurusan Tabel</h1>
+            <h1>Lihat Kelas Siswa</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -42,24 +42,31 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>jurusan</th>
                   <th>Siswa</th>
+                  <th>Kelas</th>
+                  <th>Jurusan</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Sniren</td>
-                </tr>
+                  @foreach ($siswa as $data)                      
+                  <tr>
+                    <td>{{$loop->iteration}} </td>
+                    <td>{{$data->nama}} </td>
+                    <td>{{$data->kelas->kelas}} </td>
+                    <td>{{$data->kelas->jurusan->nama}} </td>
+                    <td>
+                      <a href="{{ url('/buku-induk/siswa/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
+                    </td>
+                  </tr>
+                  @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Jurusan</th>
                   <th>Siswa</th>
+                  <th>Kelas</th>
+                  <th>Jurusan</th>
                 </tr>
                 </tfoot>
               </table>
@@ -75,25 +82,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Hapus Data</button>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection

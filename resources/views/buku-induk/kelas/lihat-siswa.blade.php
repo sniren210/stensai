@@ -51,12 +51,14 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($siswa as $data)                        
                     <tr>
-                      <td>1.</td>
-                      <td>Sniren</td>
-                      <td>Update software</td>
-                      <td>6969696969</td>
+                      <td>{{$loop->iteration}} </td>
+                      <td>{{$data->nama}} </td>
+                      <td>{{$data->kelas->kelas}} </td>
+                      <td>{{$data->kelas->jurusan->nama}} </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

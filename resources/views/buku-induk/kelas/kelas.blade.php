@@ -18,7 +18,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>jurusan Tabel</h1>
+            <h1>kelas Tabel</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -45,7 +45,7 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/jurusan/create') }}" class="btn btn-primary">Tambah</a>
+              <a href="{{ url('/kelas/create') }}" class="btn btn-primary">Tambah</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -53,20 +53,22 @@
                 <thead>
                 <tr>
                   <th>No</th>
+                  <th>kelas</th>
+                  <th>Sub Kelas</th>
                   <th>Jurusan</th>
-                  <th>Singkatan</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach ($jurusan as $data)                      
+                  @foreach ($kelas as $data)                      
                   <tr>
                     <td>{{$loop->iteration}} </td>
-                    <td>{{$data->nama}} </td>
-                    <td>{{$data->singkatan}} </td>
+                    <td>{{$data->kelas}} </td>
+                    <td>{{$data->sub_kelas}} </td>
+                    <td>{{$data->jurusan->nama}} </td>
                     <td>
-                      <a href="{{ url('/jurusan/'.$data->id) }}" class="badge badge-info">Detail Siswa</a>
-                      <a href="{{ url('/jurusan/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
+                      <a href="{{ url('/kelas/'.$data->id) }}" class="badge badge-info">Lihat Siswa</a>
+                      <a href="{{ url('/kelas/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                       <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#delete{{$data->id}}">Hapus</button>
                     </td>
                   </tr>
@@ -75,8 +77,9 @@
                 <tfoot>
                 <tr>
                   <th>No</th>
+                  <th>kelas</th>
+                  <th>Sub Kelas</th>
                   <th>Jurusan</th>
-                  <th>Singkatan</th>
                   <th>Aksi</th>
                 </tr>
                 </tfoot>
@@ -95,22 +98,22 @@
   <!-- /.content-wrapper -->
 
   <!-- Modal -->
-  @foreach ($jurusan as $data)    
+  @foreach ($kelas as $data)    
   <div class="modal fade" id="delete{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Hapus Data Jurusan</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Hapus Data kelas</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          yakin ingin menghapus data jurusan {{$data->nama}} ?
+          yakin ingin menghapus kelas {{$data->kelas}} {{$data->sub_kelas}} ?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form method="POST" action="/jurusan/{{$data->id}}">
+          <form method="POST" action="/kelas/{{$data->id}}">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-danger">Hapus Data</button>

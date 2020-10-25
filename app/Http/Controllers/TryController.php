@@ -35,6 +35,15 @@ class TryController extends Controller
             'kelas' => kelas::all(),
             'mapel' => mapel::all(),
             'sekolah' => sekolah::all(),
+            'jadwal_first' => jadwal_guru::where('guru_id',1)->get(),
+            'jadwal_kelas_first' => jadwal_kelas::where([
+                ['jurusan_id','=',1],
+                ['kelas_id','=',1],
+            ])->get(),
+            'kelas_first' => jadwal_kelas::where([
+                ['jurusan_id','=',1],
+                ['kelas_id','=',2],
+            ])->first(),
         ];
         return view('try', $data);
     }

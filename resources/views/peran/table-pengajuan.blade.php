@@ -42,28 +42,31 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nama Siswa</th>
+                  <th>Nama</th>
                   <th>NIS</th>
                   <th>Jenis</th>
                   <th>Pengajuan</th>
+                  <th>Deskripsi</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td width="30%">Trident</td>
-                  <td width="20%">Internet
-                    Explorer 4.0
-                  </td>
-                  <td width="20%">Win 95+</td>
-                  <td width="30%">Win 95+</td>
-                </tr>
+                  @foreach ($pengajuan as $data)                      
+                  <tr>
+                    <td>{{$loop->iteration}} </td>
+                    <td width="20%">{{$data->siswa->nama}} </td>
+                    <td width="10%">{{$data->siswa->nis}} </td>
+                    <td width="30%">{{$data->pengajuan}} </td>
+                    <td width="40%">{{$data->deskripsi}} </td>
+                  </tr>
+                  @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Nama Siswa</th>
+                  <th>Nama</th>
                   <th>NIS</th>
                   <th>Jenis</th>
                   <th>Pengajuan</th>
+                  <th>Deskripsi</th>
                 </tr>
                 </tfoot>
               </table>

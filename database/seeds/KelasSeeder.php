@@ -15,23 +15,28 @@ class KelasSeeder extends Seeder
         DB::table('kelas')->insert(array(
             [
             'kelas' => 'X',
-            'sub_kelas' => 'A'
+            'sub_kelas' => 'A',
+            'jurusan_id' => 1,
             ],
             [
             'kelas' => 'X',
-            'sub_kelas' => 'B'
+            'sub_kelas' => 'B',
+            'jurusan_id' => 2,
             ],
             [
             'kelas' => 'XI',
-            'sub_kelas' => 'A'
+            'sub_kelas' => 'A',
+            'jurusan_id' => 1,
             ],
             [
             'kelas' => 'XII',
-            'sub_kelas' => 'A'
+            'sub_kelas' => 'A',
+            'jurusan_id' => 2,
             ],
             [
             'kelas' => 'XII',
-            'sub_kelas' => 'B'
+            'sub_kelas' => 'B',
+            'jurusan_id' => 2,
             ],
         ));
     }

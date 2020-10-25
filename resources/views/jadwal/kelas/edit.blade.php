@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Ruang</h1>
+          <h1>Jadwal Kelas</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -30,37 +30,54 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Ruang Create</h3>
-            </div>
+              <h3 class="card-title">Jadwal Kelas edit</h3>
+            </div>`
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form">
+            <form method="POST" action="/jadwal-kelas/{{$jadwal->id}}">
+              @csrf
+              @method('put')
               <div class="card-body">
                 <div class="form-group">
-                  <label>Kelas</label>
-                  <select class="custom-select">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                  <label>kelas</label>
+                  <select class="custom-select @error('kelas') is-invalid @enderror" name="kelas">
+                    @foreach ($kelas as $data)                        
+                    <option value="{{$data->id}}" {{($data->id == $jadwal->kelas_id) ? 'selected' : ' '}}>{{$data->kelas}}-{{$data->sub_kelas}} {{$data->jurusan->singkatan}}</option>
+                    @endforeach
                   </select>
+                  @error('kelas')
+                       <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
                 </div>
                 <div class="form-group">
                   <label>Mata Pelajaran</label>
-                  <select class="custom-select">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                  <select class="custom-select @error('mapel') is-invalid @enderror" name="mapel">
+                    @foreach ($mapel as $data)                        
+                    <option value="{{$data->id}}" {{($data->id == $jadwal->mapel_id) ? 'selected' : ' '}}>{{$data->nama}} </option>
+                    @endforeach
                   </select>
+                  @error('mapel')
+                       <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Jam ke</label>
+                  <input type="text" class="form-control @error('jam_ke') is-invalid @enderror" id="exampleInputEmail1" name="jam_ke" value="{{$jadwal->jam_ke}}">
+                  @error('jam_ke')
+                       <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
                 </div>
               </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <a href="{{ url('/jadwal-kelas/table') }}" type="submit" class="btn btn-link">Submit</a>
+                <a href="{{ url('/jadwal-kelas/'.$jadwal->kelas_id) }}" type="submit" class="btn btn-link">Kembali</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>

@@ -105,12 +105,12 @@
               <p>Profile</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ url('/mading') }}" class="nav-link">
+          {{-- <li class="nav-item">
+            <a href="{{ url('/api-tokens') }}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>API Tokens</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ url('/account-guru') }}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
@@ -175,35 +175,24 @@
               <p>Jurusan</p>
             </a>
           </li>
-          <li class="nav-header">Jadwal</li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-circle"></i>
-              <p>
-                Jadwal Kelas
-                <i class="right fas fa-angle-left"></i>
-              </p>
+          <li class="nav-item">
+            <a href="{{ url('/kelas') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Kelas</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('/jadwal-kelas') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>X</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/jadwal-kelas') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>XI</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/jadwal-kelas') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>XII</p>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/buku-induk/nilai-siswa') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Nilai Siswa</p>
+            </a>
+          </li>
+          <li class="nav-header">Jadwal</li>
+          <li class="nav-item">
+            <a href="{{ url('/jadwal-kelas') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Jadwal Kelas</p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('/jadwal-guru') }}" class="nav-link">
@@ -212,7 +201,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/jadwal-guru') }}" class="nav-link">
+            <a href="{{ url('/jadwal-ruang') }}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>Jadwal Ruang</p>
             </a>
