@@ -12,8 +12,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Simple Tables</li>
+              <li class="breadcrumb-item"><a href="#">Buku Induk</a></li>
+              <li class="breadcrumb-item"><a href="#">Siswa</a></li>
+              <li class="breadcrumb-item active">Nilai Siswa</li>
             </ol>
           </div>
         </div>

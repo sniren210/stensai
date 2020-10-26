@@ -23,13 +23,13 @@ class CreateSiswasTable extends Migration
             $table->date('tgl_lahir');
             $table->string('agama');
             $table->integer('anak_ke');
-            $table->string('foto');
+            $table->string('foto')->default('siswa-default.png');
             $table->string('alamat');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->integer('kelas_id');
             $table->timestamps();
-            
+
             // $table->foreign('kelas_id')->references('id')->on('kelas');
         });
     }

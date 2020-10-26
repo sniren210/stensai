@@ -12,8 +12,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Simple Tables</li>
+              <li class="breadcrumb-item"><a href="#">Jadwal</a></li>
+              <li class="breadcrumb-item"><a href="#">Jadwal Ruang</a></li>
+              <li class="breadcrumb-item active">Selengkapnya</li>
             </ol>
           </div>
         </div>

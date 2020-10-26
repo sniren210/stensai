@@ -23,7 +23,7 @@ class CreateGurusTable extends Migration
             $table->string('jk');
             $table->string('agama');
             $table->string('alamat');
-            $table->string('foto');
+            $table->string('foto')->default('guru-default.png');
             $table->timestamps();
         });
     }

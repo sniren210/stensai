@@ -8,6 +8,17 @@
 </head>
 <body>
   <h1 align='center'>Try Models</h1>
+  <br>
+  <a href="/try/export">Export</a>
+  <br>
+  <br>
+  <form action="/try/import" enctype="multipart/form-data" method="POST">
+    @csrf
+    <input type="file" name="file">
+    <button type="submit">Import</button>
+  </form>
+  <br>
+  <a href="/try/pdf">Pdf</a>
   <hr>
 
   <h3>Siswa</h3>
@@ -134,7 +145,6 @@
     @endforeach
   </table>
 
-
   <h3>Jadwal Guru</h3>
   <table border="1">
     <tr>
@@ -151,38 +161,6 @@
     @endforeach
   </table>
 
-  <h3>Jadwal Guru Pertama</h3>
-  <table border="1">
-    <tr>
-      <th align="left">nama guru</th>
-      <th align="left">Jadwal</th>
-      <th align="left">Jam Ke</th>
-    </tr>
-    @foreach ($jadwal_first as $data)
-    <tr>
-      <td>{{$data->guru->nama}}</td>
-      <td>{{$data->mapel->nama}} </td>
-      <td>{{$data->jam_ke}} </td>
-    </tr>
-    @endforeach
-  </table>
-
-  {{-- {{dd($kelas_first)}} --}}
-  <h3>Jadwal Kelas {{$kelas_first->kelas->kelas}} Jurusan {{$kelas_first->jurusan->singkatan}} </h3>
-  <table border="1">
-    <tr>
-      <th align="left">Kelas</th>
-      <th align="left">Jadwal</th>
-      <th align="left">Jam Ke</th>
-    </tr>
-    @foreach ($jadwal_kelas_first as $data)
-    <tr>
-      <td>{{$data->kelas->kelas}} {{$data->jurusan->singkatan}}</td>
-      <td>{{$data->mapel->nama}} </td>
-      <td>{{$data->jam_ke}} </td>
-    </tr>
-    @endforeach
-  </table>
   
   <h3>Kelas</h3>
   <table border="1">

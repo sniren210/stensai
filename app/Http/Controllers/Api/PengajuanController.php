@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\pengajuan;
 
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Http\Resources\pengajuan as pengajuanResource;
+use App\Http\Resources\Pengajuan as pengajuanResource;
 
 class PengajuanController extends BaseController
 {

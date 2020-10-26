@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PengajuanExport;
 use App\pengajuan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajuanController extends Controller
 {
@@ -14,7 +16,7 @@ class PengajuanController extends Controller
         'mimes' => 'file harus jpeg,jpg,png',
         'file' => 'harus input file',
         'confirmed' => 'password tidak cocok',
-        'unique' => 'sudah ada'
+        'unique' => 'sudah ada',
     ];
     protected $validasi = [
         'nama' => ['required', 'string', 'max:255'],
@@ -28,12 +30,12 @@ class PengajuanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
         $data = [
-            'pengajuan'  => pengajuan::all()
+            'pengajuan' => pengajuan::all(),
         ];
 
-        return view('peran.table-pengajuan',$data);
+        return view('peran.table-pengajuan', $data);
     }
 
     /**
@@ -56,24 +58,26 @@ class PengajuanController extends Controller
     {
         // $data = siswa::all();
 
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        pengajuan::create( [
+        pengajuan::create([
             'siswa_id' => 1,
             'pengajuan' => $request->pengajuan,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi,
         ]);
-        return redirect('peran/pengajuan')->with('status', 'pengajuan berhasil ditambahkan.');
+        return redirect('peran/pengajuan')->with(
+            'status',
+            'pengajuan berhasil ditambahkan.'
+        );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\pengajuan  $pengajuan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(pengajuan $pengajuan)
+    public function export()
     {
-        //
+        $date = date('Y-m-d,s');
+
+        return Excel::download(
+            new PengajuanExport(),
+            'Pengajuan ' . $date . '.xlsx'
+        );
     }
 }

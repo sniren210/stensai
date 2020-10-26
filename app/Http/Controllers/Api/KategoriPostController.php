@@ -9,7 +9,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Kategori_post as Kategori_postResource;
 use Illuminate\Support\Facades\Validator;
 
-class Kategori_postController extends BaseController
+class KategoriPostController extends BaseController
 {
     public function index()
     {

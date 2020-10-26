@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
 use App\siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SiswaController extends Controller
 {
@@ -17,7 +21,7 @@ class SiswaController extends Controller
         'confirmed' => 'password tidak cocok',
         'unique' => 'sudah ada',
         'date' => 'tanggal  harus format YY/MM/DD',
-        'numeric' => 'harus di isi angka'
+        'numeric' => 'harus di isi angka',
     ];
     protected $validasi = [
         'nama' => ['required', 'string', 'max:255'],
@@ -26,14 +30,14 @@ class SiswaController extends Controller
         'tmp_lahir' => ['required', 'string', 'max:255'],
         'tgl_lahir' => ['required', 'date', 'max:255'],
         'jk' => ['required', 'max:255'],
-        'agama' => ['required','string', 'max:255'],
-        'anak_ke' => ['required','numeric', 'max:255'],
+        'agama' => ['required', 'string', 'max:255'],
+        'anak_ke' => ['required', 'numeric', 'max:255'],
         'alamat' => ['required', 'string', 'min:8'],
         'nama_ayah' => ['required', 'string', 'max:255'],
         'nama_ibu' => ['required', 'string', 'max:255'],
         'kelas' => ['required', 'max:255'],
         'jurusan' => ['required', 'max:255'],
-        'foto' => ['required', 'file', 'image' ,'mimes:jpeg,png,jpg'],
+        'foto' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg'],
         // 'foto' => 'required|file|image|mimes:jpeg,png,jpg'
     ];
     /**
@@ -45,29 +49,28 @@ class SiswaController extends Controller
     {
         //
         $data = [
-            'siswa' => siswa::all()
+            'siswa' => siswa::all(),
         ];
 
-        return view('buku-induk.siswa.table',$data);
-
+        return view('buku-induk.siswa.table', $data);
     }
 
     public function home()
     {
         $data = [
-            'siswa' => siswa::all()
+            'siswa' => siswa::all(),
         ];
 
-        return view('buku-induk.siswa.buku-induk',$data);
+        return view('buku-induk.siswa.buku-induk', $data);
     }
 
     public function selengkapnya(siswa $siswa)
     {
         $data = [
-            'siswa' => $siswa
+            'siswa' => $siswa,
         ];
 
-        return view('buku-induk.siswa.selengkapnya',$data);
+        return view('buku-induk.siswa.selengkapnya', $data);
     }
 
     /**
@@ -79,7 +82,6 @@ class SiswaController extends Controller
     {
         //
         return view('buku-induk.siswa.tambah');
-
     }
 
     /**
@@ -91,13 +93,14 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        $request->foto->originalName = time().'_'.$request->foto->getClientOriginalName();
-        
-        $request->foto->move('img/siswa',$request->foto->originalName);
+        $request->foto->originalName =
+            time() . '_' . $request->foto->getClientOriginalName();
 
-        siswa::create( [
+        $request->foto->move('img/siswa', $request->foto->originalName);
+
+        siswa::create([
             'nama' => $request->nama,
             'nis' => $request->nis,
             'nisn' => $request->nisn,
@@ -114,7 +117,10 @@ class SiswaController extends Controller
             'jurusan_id' => $request->jurusan,
         ]);
 
-        return redirect('buku-induk/siswa')->with('status', 'Data siswa berhasil ditambahkan.');
+        return redirect('buku-induk/siswa')->with(
+            'status',
+            'Data siswa berhasil ditambahkan.'
+        );
     }
 
     /**
@@ -126,11 +132,10 @@ class SiswaController extends Controller
     public function show(siswa $siswa)
     {
         $data = [
-            'siswa' => $siswa
+            'siswa' => $siswa,
         ];
         //
-        return view('buku-induk.siswa.detail',$data);
-
+        return view('buku-induk.siswa.detail', $data);
     }
 
     /**
@@ -142,11 +147,10 @@ class SiswaController extends Controller
     public function edit(siswa $siswa)
     {
         $data = [
-            'siswa' => $siswa
+            'siswa' => $siswa,
         ];
 
-        return view('buku-induk.siswa.edit',$data);
-
+        return view('buku-induk.siswa.edit', $data);
     }
 
     /**
@@ -160,19 +164,20 @@ class SiswaController extends Controller
     {
         $data = $siswa;
         //
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
         if ($request->foto->originalName = 'siswa-default.png') {
-            $request->foto->originalName = time().'_'.$request->foto->getClientOriginalName();
-        }else{
-            $request->foto->originalName = time().'_'.$request->foto->getClientOriginalName();
-            File::delete('img/siswa/'.$data->foto);
+            $request->foto->originalName =
+                time() . '_' . $request->foto->getClientOriginalName();
+        } else {
+            $request->foto->originalName =
+                time() . '_' . $request->foto->getClientOriginalName();
+            File::delete('img/siswa/' . $data->foto);
         }
 
-        
-        $request->foto->move('img/siswa',$request->foto->originalName);
+        $request->foto->move('img/siswa', $request->foto->originalName);
 
-        siswa::where('id',$data->id)->update( [
+        siswa::where('id', $data->id)->update([
             'nama' => $request->nama,
             'nis' => $request->nis,
             'nisn' => $request->nisn,
@@ -189,7 +194,10 @@ class SiswaController extends Controller
             'jurusan_id' => $request->jurusan,
         ]);
 
-        return redirect('buku-induk/siswa')->with('status', 'Data siswa berhasil di ubah.');
+        return redirect('buku-induk/siswa')->with(
+            'status',
+            'Data siswa berhasil di ubah.'
+        );
     }
 
     /**
@@ -201,11 +209,57 @@ class SiswaController extends Controller
     public function destroy(siswa $siswa)
     {
         //
-        if (!$siswa->foto = 'siswa-default.png') {
-            File::delete('img/siswa/'.$siswa->foto);
+        if (!($siswa->foto = 'siswa-default.png')) {
+            File::delete('img/siswa/' . $siswa->foto);
         }
         siswa::destroy($siswa->id);
 
-        return redirect('buku-induk/siswa')->with('status', 'Data siswa berhasil dihapus.');
+        return redirect('buku-induk/siswa')->with(
+            'status',
+            'Data siswa berhasil dihapus.'
+        );
+    }
+
+    public function export()
+    {
+        $date = date('Y-m-d,s');
+
+        return Excel::download(new SiswaExport(), 'Siswa ' . $date . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate(
+            [
+                'import' => 'required',
+                'file',
+                'mimes:xlsx,csv',
+            ],
+            [
+                'required' => 'form harus di isi',
+                'mimes' => 'file harus csv,xlsx',
+                'file' => 'harus input file',
+            ]
+        );
+
+        Excel::import(new SiswaImport(), request()->file('import'));
+
+        return redirect('buku-induk/siswa')->with(
+            'status',
+            'Import Data guru berhasil.'
+        );
+    }
+
+    public function pdf()
+    {
+        $date = date('Y-m-d');
+
+        $data = siswa::all();
+
+        view()->share('siswa', $data);
+
+        $pdf = PDF::loadView('try-pdf', $data);
+
+        return $pdf->download('try' . $date . '.pdf');
     }
 }

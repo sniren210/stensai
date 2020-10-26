@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('event', 'Api\EventController');
     Route::resource('guru', 'Api\GuruController');
     Route::resource('jadwal-kelas', 'Api\JadwalKelasController');
-    Route::resource('jadwal-guru', 'Api\JadwakGuruController');
+    Route::resource('jadwal-guru', 'Api\JadwalGuruController');
     Route::resource('jadwal-ruang', 'Api\JadwalRuangController');
     Route::resource('kategori-post', 'Api\KategoriPostController');
     Route::resource('kelas', 'Api\KelasController');

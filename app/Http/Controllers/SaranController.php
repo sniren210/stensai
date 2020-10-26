@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\event;
+use App\Exports\SaranExport;
 use App\saran;
 use App\siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaranController extends Controller
 {
@@ -17,7 +19,7 @@ class SaranController extends Controller
         'mimes' => 'file harus jpeg,jpg,png',
         'file' => 'harus input file',
         'confirmed' => 'password tidak cocok',
-        'unique' => 'sudah ada'
+        'unique' => 'sudah ada',
     ];
     protected $validasi = [
         'nama' => ['required', 'string', 'max:255'],
@@ -33,10 +35,10 @@ class SaranController extends Controller
     public function index()
     {
         $data = [
-            'saran' => saran::all()
+            'saran' => saran::all(),
         ];
 
-        return view('peran.table-saran',$data);
+        return view('peran.table-saran', $data);
     }
 
     /**
@@ -47,10 +49,10 @@ class SaranController extends Controller
     public function create()
     {
         $data = [
-            'event' => event::all()
+            'event' => event::all(),
         ];
 
-        return view('peran.saran',$data);
+        return view('peran.saran', $data);
     }
 
     /**
@@ -63,23 +65,23 @@ class SaranController extends Controller
     {
         // $data = siswa::all();
 
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        saran::create( [
+        saran::create([
             'siswa_id' => 1,
             'event_id' => $request->event,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi,
         ]);
-        return redirect('peran/saran')->with('status', 'Saran berhasil ditambahkan.');
+        return redirect('peran/saran')->with(
+            'status',
+            'Saran berhasil ditambahkan.'
+        );
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\saran  $saran
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(saran $saran)
+
+    public function export()
     {
-        //
+        $date = date('Y-m-d,s');
+
+        return Excel::download(new SaranExport(), 'Saran ' . $date . '.xlsx');
     }
 }

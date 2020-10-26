@@ -22,8 +22,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item"><a href="#">Siswa</a></li>
+              <li class="breadcrumb-item active">Table</li>
             </ol>
           </div>
         </div>
@@ -45,7 +45,13 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/buku-induk/siswa/create') }}" class="btn btn-primary">Tambah</a>
+              <div class="float-left">
+                <a href="{{ url('/buku-induk/siswa/create') }}" class="btn btn-primary">Tambah</a>
+              </div>
+              <div class="float-right">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#export">Export</button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#import">Import</button>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -126,4 +132,73 @@
     </div>
   </div>
   @endforeach
+
+  {{-- modal export --}}
+  <div class="modal fade" id="export" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Export Data Siswa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <p>Export Excel</p>
+              <a href="{{ url('/buku-induk/export/siswa') }}">Excel</a>
+            </div>
+            <div class="col-6">
+              <p>Export PDF</p>
+              <a href="">PDF</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- import --}}
+  <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/buku-induk/import/siswa" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('post')
+            <div class="form-group">
+              <label for="exampleInputFile">Import</label>
+              <div class="input-group">
+                <div class="custom-control custom-file flex-wrap">
+                  <input type="file" class="custom-file-input col-12 @error('import') is-invalid @enderror" id="exampleInputFile" name="import">
+                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                  @error('import')
+                       <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
+                 </div>
+              </div>
+            </div>
+            <div class="">
+              <button type="submit" class="btn btn-primary">Import</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
