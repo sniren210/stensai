@@ -15,11 +15,12 @@ class CreateAjuansTable extends Migration
     {
         Schema::create('ajuan', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->string('judul');
             $table->string('deskripsi');
             $table->string('thumbnail');
             $table->string('tanggal');
-            $table->integer('kategori_id'); 
+            $table->integer('kategori_id');
             $table->timestamps();
         });
     }

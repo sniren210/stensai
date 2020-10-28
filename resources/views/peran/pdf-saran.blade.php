@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PDF Demo in Laravel 7</title>
+    <title>Pengajuan PDF SMKN 1 Majalengka</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   </head>
   <body>
     <div class="row">
       <div class="col-6">
-        <h3>Data Siswa SMKN 1 Majalengka</h3>
+        <h3>Data Pengajuan SMKN 1 Majalengka</h3>
       </div>
     </div>
     <table class="table table-bordered" border="1">
@@ -19,25 +19,17 @@
       <tr class="table-danger">
         <td>Nama</td>
         <td>NIS</td>
-        <td>NISN</td>
-        <td>Jenis kelamin</td>
-        <td>TTL</td>
-        <td>Nama Ayah</td>
-        <td>Nama Ibu</td>
-        <td>Alamat</td>
+        <td>saran</td>
+        <td>Dekripsi</td>
       </tr>
       </thead>
       <tbody>
-        @foreach ($siswa as $data)
+        @foreach ($saran as $data)
         <tr>
-            <td>{{ $data->nama }}</td>
-            <td>{{ $data->nis }}</td>
-            <td>{{ $data->nisn }}</td>
-            <td>{{ $data->jk }}</td>
-            <td>{{ $data->tmp_lahir }} {{ $data->tgl_lahir }}</td>
-            <td>{{ $data->nama_ayah }} </td>
-            <td>{{ $data->nama_ibu }} </td>
-            <td>{{ $data->alamat }}</td>
+            <td>{{ $data->siswa->nama }}</td>
+            <td>{{ $data->siswa->nis }}</td>
+            <td>{{ $data->event->nama }}</td>
+            <td>{{ $data->deskripsi }} </td>
         </tr>
         @endforeach
       </tbody>

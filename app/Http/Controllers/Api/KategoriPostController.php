@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Kategori_post;
+use App\kategori_post;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Kategori_post as Kategori_postResource;

@@ -54,6 +54,10 @@
                   <div class="col-7">
                     <sub>Publish By</sub>
                     <h2 class="lead"><b>{{$post->user->name}}</b></h2>
+                    @if ($post->nama)                        
+                    <sub>Ajuan By</sub>
+                    <h2 class="lead"><b>{{$post->nama}}</b></h2>
+                    @endif
                     <sub>Date</sub>
                     <h4 class="lead">{{$post->tanggal}}</h4>
                   </div>

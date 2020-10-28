@@ -6,6 +6,7 @@ use App\event;
 use App\Exports\SaranExport;
 use App\saran;
 use App\siswa;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -83,5 +84,22 @@ class SaranController extends Controller
         $date = date('Y-m-d,s');
 
         return Excel::download(new SaranExport(), 'Saran ' . $date . '.xlsx');
+    }
+
+    public function pdf()
+    {
+        $date = date('Y-m-d');
+
+        // retreive all records from db
+        $data = saran::all();
+
+        // share data to view
+        view()->share('saran', $data);
+
+        return PDF::loadView('peran.pdf-saran', $data)
+            ->setPaper('a4', 'landscape')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setWarnings(false)
+            ->download('saran' . $date . '.pdf');
     }
 }

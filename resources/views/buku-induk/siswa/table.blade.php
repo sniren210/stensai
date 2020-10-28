@@ -151,7 +151,7 @@
             </div>
             <div class="col-6">
               <p>Export PDF</p>
-              <a href="">PDF</a>
+              <a href="{{ url('/buku-induk/pdf/siswa') }}">PDF</a>
             </div>
           </div>
         </div>
@@ -178,6 +178,7 @@
             @method('post')
             <div class="form-group">
               <label for="exampleInputFile">Import</label>
+              <sub>Template Excel harus seperti <a href="{{ url('/import/Siswa.xlsx') }}">Ini</a></sub>
               <div class="input-group">
                 <div class="custom-control custom-file flex-wrap">
                   <input type="file" class="custom-file-input col-12 @error('import') is-invalid @enderror" id="exampleInputFile" name="import">

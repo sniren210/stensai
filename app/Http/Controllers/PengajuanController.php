@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PengajuanExport;
 use App\pengajuan;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -79,5 +80,22 @@ class PengajuanController extends Controller
             new PengajuanExport(),
             'Pengajuan ' . $date . '.xlsx'
         );
+    }
+
+    public function pdf()
+    {
+        $date = date('Y-m-d');
+
+        // retreive all records from db
+        $data = pengajuan::all();
+
+        // share data to view
+        view()->share('pengajuan', $data);
+
+        return PDF::loadView('peran.pdf-pengajuan', $data)
+            ->setPaper('a4', 'landscape')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setWarnings(false)
+            ->download('saran' . $date . '.pdf');
     }
 }

@@ -19,6 +19,7 @@ use App\saran;
 use App\sekolah;
 use App\siswa;
 use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\ServiceProvider as SP;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TryController extends Controller
@@ -68,8 +69,13 @@ class TryController extends Controller
         // share data to view
         view()->share('siswa', $data);
 
-        $pdf = PDF::loadView('try-pdf', $data);
+        $pdf = PDF::loadView('try-pdf', $data)
+            ->setPaper('a4', 'landscape')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setWarnings(false)
+            ->save('myfile.pdf');
 
+        // $pdf = PDF::loadView('try-pdf', $data);
         // download PDF file with download method
         return $pdf->download('try' . $date . '.pdf');
     }

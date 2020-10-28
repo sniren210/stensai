@@ -254,12 +254,18 @@ class SiswaController extends Controller
     {
         $date = date('Y-m-d');
 
+        // retreive all records from db
         $data = siswa::all();
 
+        // share data to view
         view()->share('siswa', $data);
 
-        $pdf = PDF::loadView('try-pdf', $data);
+        $pdf = PDF::loadView('buku-induk.siswa.pdf', $data)
+            ->setPaper('a4', 'landscape')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setWarnings(false)
+            ->save('myfile.pdf');
 
-        return $pdf->download('try' . $date . '.pdf');
+        return $pdf->download('siswa' . $date . '.pdf');
     }
 }

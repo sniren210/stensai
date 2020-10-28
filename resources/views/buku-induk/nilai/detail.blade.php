@@ -45,7 +45,12 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/buku-induk/nilai-siswa/create') }}" class="btn btn-primary">Tambah</a>
+              <div class="float-left">
+                <a href="{{ url('/buku-induk/nilai_siswa/create') }}" class="btn btn-primary">Tambah</a>
+              </div>
+              <div class="float-right">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#export">Export</button>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -120,4 +125,33 @@
     </div>
   </div>
   @endforeach
+
+  {{-- modal export --}}
+  <div class="modal fade" id="export" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Export Data Siswa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <p>Export Excel</p>
+              <a href="{{ url('/buku-induk/export/nilai-siswa/'.$siswa->siswa->id) }}">Excel</a>
+            </div>
+            <div class="col-6">
+              <p>Export PDF</p>
+              <a href="{{ url('/buku-induk/pdf/nilai-siswa/'.$siswa->siswa->id) }}">PDF</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

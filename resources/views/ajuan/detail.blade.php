@@ -47,6 +47,18 @@
             <div class="card-body" style="border-bottom: 1px solid rgba(0,0,0,.125)">
               {{$ajuan->deskripsi}}
             </div>
+             <div class="card mt-3" style="box-shadow: unset; border-bottom: 1px solid rgba(0,0,0,.125)">
+              <div class="card-body pt-0 w-25 h-25" >
+                <div class="row">
+                  <div class="col-7">
+                    <sub>Ajuan By</sub>
+                    <h2 class="lead"><b>{{$ajuan->nama}} </b></h2>
+                    <sub>Date</sub>
+                    <h4 class="lead">{{$ajuan->tanggal}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="card-footer d-flex justify-content-end" style="background-color: unset">
               <a href="{{ url('/ajuan') }}" class="btn btn-primary">Kembali</a>
             </div>

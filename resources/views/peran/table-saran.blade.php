@@ -104,7 +104,7 @@
             </div>
             <div class="col-6">
               <p>Export PDF</p>
-              <a href="">PDF</a>
+              <a href="{{ url('/saran/pdf', []) }}">PDF</a>
             </div>
           </div>
         </div>

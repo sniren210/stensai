@@ -12,18 +12,18 @@ class PostController extends Controller
 {
     protected $messages = [
         'required' => 'Form harus di isi',
-            'email' => 'Harus di isi email',
-            'image' => 'file harus gambar',
-            'mimes' => 'file harus jpeg,jpg,png',
-            'file' => 'harus input file',
-            'confirmed' => 'password tidak cocok',
-            'unique' => 'sudah ada'
+        'email' => 'Harus di isi email',
+        'image' => 'file harus gambar',
+        'mimes' => 'file harus jpeg,jpg,png',
+        'file' => 'harus input file',
+        'confirmed' => 'password tidak cocok',
+        'unique' => 'sudah ada',
     ];
     protected $validasi = [
         'judul' => ['required', 'string', 'max:255'],
         'kategori' => ['required', 'string', 'max:255'],
         'deskripsi' => ['required', 'string', 'min:8'],
-        'thumbnail' => 'required|file|image|mimes:jpeg,png,jpg'
+        'thumbnail' => 'required|file|image|mimes:jpeg,png,jpg',
     ];
     /**
      * Display a listing of the resource.
@@ -33,11 +33,10 @@ class PostController extends Controller
     public function index()
     {
         $data = [
-            'post' => post::all()
+            'post' => post::all(),
         ];
         //
-        return view('mading.table',$data);
-
+        return view('mading.table', $data);
     }
 
     public function home($id = null)
@@ -45,32 +44,32 @@ class PostController extends Controller
         if ($id) {
             if ($id == 1) {
                 $data = [
-                    'post' => post::where('kategori_id',$id)->get(),
-                    'mading' => 'karya'
+                    'post' => post::where('kategori_id', $id)->get(),
+                    'mading' => 'karya',
                 ];
-            }else{
+            } else {
                 $data = [
-                    'post' => post::where('kategori_id',$id)->get(),
-                    'mading' => 'eskul'
+                    'post' => post::where('kategori_id', $id)->get(),
+                    'mading' => 'eskul',
                 ];
             }
-        }else{
+        } else {
             $data = [
                 'mading' => 'home',
                 'post' => post::all(),
             ];
         }
 
-        return view('mading.home',$data);    
+        return view('mading.home', $data);
     }
 
     public function selengkapnya(post $post)
     {
         $data = [
-            'post' => $post
+            'post' => $post,
         ];
 
-        return view('mading.selengkapnya',$data);     
+        return view('mading.selengkapnya', $data);
     }
 
     /**
@@ -84,8 +83,7 @@ class PostController extends Controller
             'kategori' => kategori_post::all(),
         ];
         //
-        return view('mading.tambah',$data);
-
+        return view('mading.tambah', $data);
     }
 
     /**
@@ -96,21 +94,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        $request->thumbnail->originalName = time().'_'.$request->thumbnail->getClientOriginalName();
-        
-        $request->thumbnail->move('img/thumbnail',$request->thumbnail->originalName);
+        $request->thumbnail->originalName =
+            time() . '_' . $request->thumbnail->getClientOriginalName();
 
-        post::create( [
+        $request->thumbnail->move(
+            'img/thumbnail',
+            $request->thumbnail->originalName
+        );
+
+        post::create([
+            'nama' => null,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'thumbnail' => $request->thumbnail->originalName,
             'kategori_id' => $request->kategori,
             'tanggal' => date('Y-m-d'),
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
-        return redirect('mading')->with('status', 'Mading berhasil ditambahkan.');
+        return redirect('mading')->with(
+            'status',
+            'Mading berhasil ditambahkan.'
+        );
     }
 
     /**
@@ -123,11 +129,10 @@ class PostController extends Controller
     {
         //
         $data = [
-            'post' => post::find($id)
+            'post' => post::find($id),
         ];
 
-        return view('mading.detail',$data);
-
+        return view('mading.detail', $data);
     }
 
     /**
@@ -140,11 +145,10 @@ class PostController extends Controller
     {
         $data = [
             'post' => post::find($id),
-            'kategori' => kategori_post::all()
+            'kategori' => kategori_post::all(),
         ];
         //
-        return view('mading.edit',$data);
-
+        return view('mading.edit', $data);
     }
 
     /**
@@ -158,25 +162,30 @@ class PostController extends Controller
     {
         $data = post::find($post);
 
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
         if ($request->thumbnail->originalName = 'thumbnail-default.png') {
-            $request->thumbnail->originalName = time().'_'.$request->thumbnail->getClientOriginalName();
-        }else{
-            $request->thumbnail->originalName = time().'_'.$request->thumbnail->getClientOriginalName();
-            File::delete('img/thumbnail/'.$data->thumbnail);
+            $request->thumbnail->originalName =
+                time() . '_' . $request->thumbnail->getClientOriginalName();
+        } else {
+            $request->thumbnail->originalName =
+                time() . '_' . $request->thumbnail->getClientOriginalName();
+            File::delete('img/thumbnail/' . $data->thumbnail);
         }
 
-        
-        $request->thumbnail->move('img/thumbnail',$request->thumbnail->originalName);
+        $request->thumbnail->move(
+            'img/thumbnail',
+            $request->thumbnail->originalName
+        );
 
-        post::where('id',$data->id)->update( [
+        post::where('id', $data->id)->update([
+            'nama' => $data->nama,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'thumbnail' => $request->thumbnail->originalName,
             'kategori_id' => $request->kategori,
             'tanggal' => date('Y-m-d'),
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
         return redirect('mading')->with('status', 'Mading berhasil diubah.');
     }
@@ -189,9 +198,7 @@ class PostController extends Controller
      */
     public function destroy($post)
     {
-
         post::destroy($post);
         return redirect('mading')->with('status', 'Mading berhasil dihapus.');
-
     }
 }

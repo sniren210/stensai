@@ -135,19 +135,23 @@ Route::group(['middleware' => 'auth'], function () {
     // peran
     Route::get('/saran/table', 'SaranController@index');
     Route::get('/saran/export', 'SaranController@export');
+    Route::get('/saran/pdf', 'SaranController@pdf');
     Route::get('/pengajuan/table', 'PengajuanController@index');
     Route::get('/pengajuan/export', 'PengajuanController@export');
+    Route::get('/pengajuan/pdf', 'PengajuanController@pdf');
 
     // buku induk
 
     // buku induk siswa
     Route::resource('/buku-induk/siswa', 'SiswaController');
     Route::get('/buku-induk/export/siswa', 'SiswaController@export');
+    Route::get('/buku-induk/pdf/siswa', 'SiswaController@pdf');
     Route::post('/buku-induk/import/siswa', 'SiswaController@import');
 
     // buku induk guru
     Route::resource('/buku-induk/guru', 'GuruController');
     Route::get('/buku-induk/export/guru', 'GuruController@export');
+    Route::get('/buku-induk/pdf/guru', 'GuruController@pdf');
     Route::post('/buku-induk/import/guru', 'GuruController@import');
 
     // jurusan
@@ -172,6 +176,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     // nilai siswa
     Route::resource('/buku-induk/nilai-siswa', 'NilaiSiswaController');
+    Route::get(
+        '/buku-induk/export/nilai-siswa/{id}',
+        'NilaiSiswaController@export'
+    );
+    Route::get('/buku-induk/pdf/nilai-siswa/{id}', 'NilaiSiswaController@pdf');
 
     // kelas
     Route::resource('/kelas', 'KelasController');

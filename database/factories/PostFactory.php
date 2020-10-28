@@ -19,12 +19,18 @@ use Illuminate\Support\Str;
 
 $factory->define(post::class, function (Faker $faker) {
     return [
-        'judul' => $this->faker->sentence($nbWords = 3, $variableNbWords = true),
-            'deskripsi' => $this->faker->paragraph($nbSentences = 2, $variableNbSentences = true),
-            'thumbnail' => 'thumbnail-default.png',
-            'tanggal' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'kategori_id' => 1,
-            'user_id' => 1
+        'nama' => null,
+        'judul' => $this->faker->sentence(
+            $nbWords = 3,
+            $variableNbWords = true
+        ),
+        'deskripsi' => $this->faker->paragraph(
+            $nbSentences = 2,
+            $variableNbSentences = true
+        ),
+        'thumbnail' => 'thumbnail-default.png',
+        'tanggal' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+        'kategori_id' => 1,
+        'user_id' => 1,
     ];
 });
-
