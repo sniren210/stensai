@@ -9,11 +9,7 @@ class saran extends Model
     //
     protected $table = 'saran';
 
-    protected $fillable = [        
-        'siswa_id',
-        'event_id',
-        'deskripsi'
-    ];
+    protected $fillable = ['siswa_id', 'event_id', 'deskripsi', 'siswa'];
 
     public function siswa()
     {

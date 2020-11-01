@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PengajuanExport;
 use App\pengajuan;
+use App\siswa;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -57,18 +58,45 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = siswa::all();
+        $data = siswa::all();
 
         $request->validate($this->validasi, $this->messages);
 
+        foreach ($data as $item) {
+            if ($item->nis == $request->nis) {
+                $siswa = $item;
+                $siswa_b = true;
+            } else {
+                $siswa_b = false;
+            }
+        }
+
         pengajuan::create([
-            'siswa_id' => 1,
+            'siswa_id' => $siswa_b ? $siswa->id : false,
             'pengajuan' => $request->pengajuan,
             'deskripsi' => $request->deskripsi,
+            'siswa' => $siswa_b,
         ]);
         return redirect('peran/pengajuan')->with(
             'status',
-            'pengajuan berhasil ditambahkan.'
+            'Pengajuan berhasil ditambahkan.'
+        );
+    }
+
+    public function delete(pengajuan $pengajuan)
+    {
+        if ($pengajuan->siswa_b) {
+            return redirect('pengajuan/table')->with(
+                'gagal',
+                'pengajuan Gagal dihapus.'
+            );
+        }
+
+        pengajuan::destroy($pengajuan->id);
+
+        return redirect('pengajuan/table')->with(
+            'status',
+            'pengajuan berhasil dihapus.'
         );
     }
 

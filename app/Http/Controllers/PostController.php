@@ -162,27 +162,52 @@ class PostController extends Controller
     {
         $data = post::find($post);
 
-        $request->validate($this->validasi, $this->messages);
-
-        if ($request->thumbnail->originalName = 'thumbnail-default.png') {
-            $request->thumbnail->originalName =
-                time() . '_' . $request->thumbnail->getClientOriginalName();
-        } else {
-            $request->thumbnail->originalName =
-                time() . '_' . $request->thumbnail->getClientOriginalName();
-            File::delete('img/thumbnail/' . $data->thumbnail);
-        }
-
-        $request->thumbnail->move(
-            'img/thumbnail',
-            $request->thumbnail->originalName
+        $request->validate(
+            [
+                'judul' => ['required', 'string', 'max:255'],
+                'kategori' => ['required', 'string', 'max:255'],
+                'deskripsi' => ['required', 'string', 'min:8'],
+                'thumbnail' => 'file|image|mimes:jpeg,png,jpg',
+            ],
+            $this->messages
         );
+
+        if ($request->thumbnail) {
+            if ($request->thumbnail->originalName = 'thumbnail-default.png') {
+                $request->thumbnail->originalName =
+                    time() . '_' . $request->thumbnail->getClientOriginalName();
+            } else {
+                $request->thumbnail->originalName =
+                    time() . '_' . $request->thumbnail->getClientOriginalName();
+                File::delete('img/thumbnail/' . $data->thumbnail);
+            }
+
+            $request->thumbnail->move(
+                'img/thumbnail',
+                $request->thumbnail->originalName
+            );
+
+            post::where('id', $data->id)->update([
+                'nama' => $data->nama,
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'thumbnail' => $request->thumbnail->originalName,
+                'kategori_id' => $request->kategori,
+                'tanggal' => date('Y-m-d'),
+                'user_id' => Auth::user()->id,
+            ]);
+
+            return redirect('mading')->with(
+                'status',
+                'Mading berhasil diubah.'
+            );
+        }
 
         post::where('id', $data->id)->update([
             'nama' => $data->nama,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'thumbnail' => $request->thumbnail->originalName,
+            'thumbnail' => $data->thumbnail,
             'kategori_id' => $request->kategori,
             'tanggal' => date('Y-m-d'),
             'user_id' => Auth::user()->id,
@@ -198,6 +223,12 @@ class PostController extends Controller
      */
     public function destroy($post)
     {
+        $data = post::find($post);
+
+        if ($data->thumbnail->originalName != 'thumbnail-default.png') {
+            File::delete('img/thumbnail/' . $data->thumbnail);
+        }
+
         post::destroy($post);
         return redirect('mading')->with('status', 'Mading berhasil dihapus.');
     }

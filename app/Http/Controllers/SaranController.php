@@ -64,18 +64,45 @@ class SaranController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = siswa::all();
+        $data = siswa::all();
 
         $request->validate($this->validasi, $this->messages);
 
+        foreach ($data as $item) {
+            if ($item->nis == $request->nis) {
+                $siswa = $item;
+                $siswa_b = true;
+            } else {
+                $siswa_b = false;
+            }
+        }
+
         saran::create([
-            'siswa_id' => 1,
+            'siswa_id' => $siswa_b ? $siswa->id : false,
             'event_id' => $request->event,
             'deskripsi' => $request->deskripsi,
+            'siswa' => $siswa_b,
         ]);
         return redirect('peran/saran')->with(
             'status',
             'Saran berhasil ditambahkan.'
+        );
+    }
+
+    public function delete(saran $saran)
+    {
+        if ($saran->siswa_b) {
+            return redirect('saran/table')->with(
+                'gagal',
+                'Saran Gagal dihapus.'
+            );
+        }
+
+        saran::destroy($saran->id);
+
+        return redirect('saran/table')->with(
+            'status',
+            'Saran berhasil dihapus.'
         );
     }
 

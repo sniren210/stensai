@@ -121,10 +121,9 @@
                         <label class="col-sm-2 col-form-label">Kelas Kompetensi</label>
                         <span class="col-sm-10 col-form-label">
                           <ul class="list-group" style="margin-left: 15px;">
-                              <li>Rpl-A</li>
-                              <li>Rpl-B</li>
-                              <li>Rpl-A</li>
-                              <li>Rpl-A</li>
+                            @foreach ($jurusan as $data)
+                            <li>{{$data->nama}} </li>
+                            @endforeach  
                           </ul>
                         </span>
                       </div>

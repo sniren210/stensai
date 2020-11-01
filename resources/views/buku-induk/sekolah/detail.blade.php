@@ -27,6 +27,13 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        @if (session('status'))
+          <div class="content">
+            <div class="alert alert-success" style="color: #155724; background-color: #d4edda;border-color: #c3e6cb;">
+              {{ session('status') }}
+            </div>
+          </div>
+        @endif
         <div class="row">
           <div class="col-md-3">
 
@@ -125,10 +132,9 @@
                         <label class="col-sm-2 col-form-label">Kelas Kompetensi</label>
                         <span class="col-sm-10 col-form-label">
                           <ul class="list-group" style="margin-left: 15px;">
-                              <li>Rpl-A</li>
-                              <li>Rpl-B</li>
-                              <li>Rpl-A</li>
-                              <li>Rpl-A</li>
+                            @foreach ($jurusan as $data)                                
+                            <li> {{$data->nama}} </li>
+                            @endforeach  
                           </ul>
                         </span>
                       </div>

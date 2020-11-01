@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a href="{{ url('/peran/pengajuan') }}" class="nav-link">Pengajuan</a>
         </li>
+        <li class="nav-item">
+          <a href="{{ url('/peran/event') }}" class="nav-link">Event</a>
+        </li>
       </ul>
     </div>
   </div>

@@ -32,6 +32,10 @@ Route::post('/peran/saran', 'SaranController@store');
 Route::get('/peran/pengajuan', 'PengajuanController@create');
 Route::post('/peran/pengajuan', 'PengajuanController@store');
 
+// event
+Route::get('/peran/event', 'EventController@home');
+Route::get('/peran/event/{event}', 'EventController@selengkapnya');
+
 // buku induk
 Route::get('/buku-induk', 'HomeController@bukuInduk');
 
@@ -134,11 +138,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     // peran
     Route::get('/saran/table', 'SaranController@index');
+    Route::delete('/saran/{saran}', 'SaranController@delete');
     Route::get('/saran/export', 'SaranController@export');
     Route::get('/saran/pdf', 'SaranController@pdf');
     Route::get('/pengajuan/table', 'PengajuanController@index');
+    Route::delete('/pengajuan/{pengajuan}', 'PengajuanController@delete');
     Route::get('/pengajuan/export', 'PengajuanController@export');
     Route::get('/pengajuan/pdf', 'PengajuanController@pdf');
+
+    // event
+    Route::resource('event', 'EventController');
 
     // buku induk
 

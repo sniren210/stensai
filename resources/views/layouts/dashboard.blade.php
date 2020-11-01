@@ -144,6 +144,12 @@
               <p>Pengajuan</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('/event') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Event</p>
+            </a>
+          </li>
           <li class="nav-header">Buku Induk</li>
           <li class="nav-item">
             <a href="{{ url('/buku-induk/siswa') }}" class="nav-link">

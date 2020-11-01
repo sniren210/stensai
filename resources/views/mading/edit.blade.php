@@ -59,29 +59,39 @@
                 <div class="form-group">
                   <label for="exampleInputFile">Thumbnail</label>
                   <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="exampleInputFile" name="thumbnail">
+                    <div class="custom-control custom-file flex-wrap">
+                      <input type="file" class="custom-file-input col-12 @error('thumbnail') is-invalid @enderror" id="exampleInputFile" name="thumbnail">
                       <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                      <span class="input-group-text" id="">Upload</span>
-                    </div>
+                      @error('thumbnail')
+                           <span class="invalid-feedback" role="alert">
+                               <strong>{{ $message }}</strong>
+                           </span>
+                       @enderror
+                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Kategori</label>
-                  <select class="custom-select" name="kategori">
+                  <select class="custom-select @error('kategori') is-invalid @enderror" name="kategori">
                     @foreach ($kategori as $data)
                         <option value="{{$data->id}} " {{($post->kategor_id = $data->id) ? 'selected' : ' '}}>{{$data->kategori}} </option>
                         {{-- <option value="{{$data->id}} ">{{$data->kategori}} </option> --}}
                     @endforeach
                   </select>
+                  @error('kategori')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <label>Deskripsi</label>
-                  <textarea class="form-control @error('deskripsi') is-invalid @enderror" rows="3" placeholder="Enter ..." name="deskripsi">
-                    {{$post->deskripsi}}
-                  </textarea>
+                  <textarea class="form-control @error('deskripsi') is-invalid @enderror" rows="3" placeholder="Enter ..." name="deskripsi">{{$post->deskripsi}}</textarea>
+                  @error('deskripsi')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
                 </div>
               </div>
               <!-- /.card-body -->

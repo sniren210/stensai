@@ -35,12 +35,12 @@
             <!-- /.card-header -->
              <!-- /.card-header -->
              @if (session('status'))
-             <div class="content">
-               <div class="alert alert-success" style="color: #155724; background-color: #d4edda;border-color: #c3e6cb;">
-                 {{ session('status') }}
-               </div>
-             </div>
-           @endif
+              <div class="content">
+                <div class="alert alert-success" style="color: #155724; background-color: #d4edda;border-color: #c3e6cb;">
+                  {{ session('status') }}
+                </div>
+              </div>
+            @endif
            <!-- form start -->
            <form method="POST" action="/peran/pengajuan">
              @csrf

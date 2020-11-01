@@ -18,6 +18,7 @@ class CreatePengajuansTable extends Migration
             $table->integer('siswa_id');
             $table->string('pengajuan');
             $table->string('deskripsi');
+            $table->boolean('siswa_b');
             $table->timestamps();
         });
     }

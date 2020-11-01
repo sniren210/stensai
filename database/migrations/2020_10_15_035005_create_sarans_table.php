@@ -18,6 +18,7 @@ class CreateSaransTable extends Migration
             $table->integer('siswa_id');
             $table->integer('event_id');
             $table->string('deskripsi');
+            $table->boolean('siswa_b');
             $table->timestamps();
         });
     }
