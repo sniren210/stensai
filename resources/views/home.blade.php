@@ -34,7 +34,10 @@
                   Stensai Apps adalah sebuah platform yang memiliki 3 fitur utama
                 </p>
 
-                <a href="{{ url('/login') }}" class="card-link">Login Guru</a>
+                @if (!Auth::guard()->check() && !Auth::guard('siswa')->check() && !Auth::guard('guru')->check())
+                <a href="{{ url('/login-guru') }}" class="card-link">Login Guru</a>
+                <a href="{{ url('/login-siswa') }}" class="card-link">Login Siswa</a>
+                @endif
               </div>
             </div>
           </div>

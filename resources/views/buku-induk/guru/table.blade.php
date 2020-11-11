@@ -46,7 +46,9 @@
           <div class="card">
             <div class="card-header">
               <div class="float-left">
+                @if (Auth::guard('web')->check())
                 <a href="{{ url('/buku-induk/guru/create') }}" class="btn btn-primary">Tambah</a>
+                @endif
               </div>
               <div class="float-right">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#export">Export</button>
@@ -76,8 +78,10 @@
                     </td>
                     <td>
                       <a href="{{ url('/buku-induk/guru/'.$data->id) }}" class="badge badge-info">Detail</a>
+                      @if (Auth::guard('web')->check())              
                       <a href="{{ url('/buku-induk/guru/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                       <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#delete{{$data->id}}">Hapus</button>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

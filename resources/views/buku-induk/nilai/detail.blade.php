@@ -46,7 +46,9 @@
           <div class="card">
             <div class="card-header">
               <div class="float-left">
+                @if (Auth::guard('web')->check())                
                 <a href="{{ url('/buku-induk/nilai_siswa/create') }}" class="btn btn-primary">Tambah</a>
+                @endif
               </div>
               <div class="float-right">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#export">Export</button>
@@ -60,7 +62,9 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>NIS</th>
+                  @if (Auth::guard('web')->check())              
                   <th>Aksi</th>
+                  @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -69,10 +73,12 @@
                     <td>{{$loop->iteration}} </td>
                     <td>{{$data->nilai}}</td>
                     <td>{{$data->mapel->nama}}</td>
+                    @if (Auth::guard('web')->check())            
                     <td>
                       <a href="{{ url('/buku-induk/nilai-siswa/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                       <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#delete{{$data->id}}">Hapus</button>
                     </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>
@@ -81,7 +87,9 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>NIS</th>
+                  @if (Auth::guard('web')->check())              
                   <th>Aksi</th>
+                  @endif
                 </tr>
                 </tfoot>
               </table>

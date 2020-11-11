@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     /**
      * Show the application dashboard.
      *
@@ -25,7 +24,6 @@ class HomeController extends Controller
     function dashboard()
     {
         return view('dashboard');
-        
     }
 
     public function jadwal()

@@ -16,6 +16,8 @@ class CreateGurusTable extends Migration
         Schema::create('guru', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->integer('nip');
             $table->integer('npwp');
             $table->string('tmp_lahir');
@@ -24,6 +26,7 @@ class CreateGurusTable extends Migration
             $table->string('agama');
             $table->string('alamat');
             $table->string('foto')->default('guru-default.png');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

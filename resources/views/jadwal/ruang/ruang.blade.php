@@ -45,8 +45,8 @@
                   <thead>                  
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Nama</th>
-                      <th>NIP</th>
+                      <th>Nomor</th>
+                      <th>Jenis</th>
                       <th style="width: 15%">Lihat Jadwal</th>
                     </tr>
                   </thead>
@@ -56,7 +56,7 @@
                       <td>{{$loop->iteration}} </td>
                       <td>{{$data->nmr_ruang}} </td>
                       <td>{{$data->jenis_ruang}} </td>
-                      <td><a href="{{ url('/jadwal-ruang/jadwal/'.$data->id) }}" class="badge bg-info">Lihat</a></td>
+                      <td><a href="{{ url('/siswa/jadwal-ruang/jadwal/'.$data->id) }}" class="badge bg-info">Lihat</a></td>
                     </tr>
                     @endforeach
                   </tbody>

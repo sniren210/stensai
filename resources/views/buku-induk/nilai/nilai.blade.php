@@ -28,7 +28,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Nilai Siswa {{$siswa->siswa->nama}} </h3>
+                <h3 class="card-title">Nilai Siswa {{Auth::user()->nama}} </h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -51,7 +51,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($nilai as $data)                        
+                    @foreach (Auth::user()->nilai_siswa as $data)                        
                     <tr>
                       <td>{{$loop->iteration}} </td>
                       <td>{{$data->mapel->nama}} </td>

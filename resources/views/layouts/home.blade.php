@@ -1,3 +1,5 @@
+{{-- {{dd(Auth::guard('siswa')->user())}} --}}
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -51,12 +53,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ url('/peran') }}" class="nav-link">Peran</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/buku-induk') }}" class="nav-link">Buku Induk</a>
+            <a href="{{ url('/sekolah') }}" class="nav-link">Sekolah</a>
+          </li>
+          @if ( Auth::guard('siswa')->check() )              
+          <li class="nav-item">
+            <a href="{{ url('/siswa/buku-induk') }}" class="nav-link">Buku Induk</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/jadwal/home') }}" class="nav-link">Jadwal</a>
+            <a href="{{ url('/siswa/jadwal/home') }}" class="nav-link">Jadwal</a>
           </li>
-          @if (Auth::user())
+          @endif
+          @if (Auth::guard()->check() || Auth::guard('siswa')->check() || Auth::guard('guru')->check())
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

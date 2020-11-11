@@ -45,7 +45,9 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/kelas/create') }}" class="btn btn-primary">Tambah</a>
+              @if (Auth::guard('web')->check())    
+                <a href="{{ url('/kelas/create') }}" class="btn btn-primary">Tambah</a>
+              @endif
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -68,8 +70,10 @@
                     <td>{{$data->jurusan->nama}} </td>
                     <td>
                       <a href="{{ url('/kelas/'.$data->id) }}" class="badge badge-info">Lihat Siswa</a>
+                      @if (Auth::guard('web')->check())              
                       <a href="{{ url('/kelas/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                       <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#delete{{$data->id}}">Hapus</button>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

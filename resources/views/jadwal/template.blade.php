@@ -14,16 +14,16 @@
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="{{ url('/jadwal') }}" class="nav-link">Home</a>
+          <a href="{{ url('/siswa/jadwal') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/jadwal-kelas/home') }}" class="nav-link">Jadwal kelas</a>
+          <a href="{{ url('/siswa/jadwal-kelas/jadwal') }}" class="nav-link">Jadwal kelas</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/jadwal-guru/home') }}" class="nav-link">Jadwal Guru</a>
+          <a href="{{ url('/siswa/jadwal-guru/home') }}" class="nav-link">Jadwal Guru</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/jadwal-ruang/home') }}" class="nav-link">Jadwal Ruang</a>
+          <a href="{{ url('/siswa/jadwal-ruang/home') }}" class="nav-link">Jadwal Ruang</a>
         </li>
       </ul>
     </div>

@@ -45,7 +45,9 @@
                   <th>Siswa</th>
                   <th>Kelas</th>
                   <th>Jurusan</th>
-                  <th>Aksi</th>
+                  @if (Auth::guard('web')->check())
+                  <th>Aksi</th>                  
+                  @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -55,9 +57,11 @@
                     <td>{{$data->nama}} </td>
                     <td>{{$data->kelas->kelas}} </td>
                     <td>{{$data->kelas->jurusan->nama}} </td>
+                    @if (Auth::guard('web')->check())                
                     <td>
                       <a href="{{ url('/buku-induk/siswa/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                     </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>
@@ -67,6 +71,9 @@
                   <th>Siswa</th>
                   <th>Kelas</th>
                   <th>Jurusan</th>
+                  @if (Auth::guard('web')->check())
+                  <th>Aksi</th>
+                  @endif
                 </tr>
                 </tfoot>
               </table>

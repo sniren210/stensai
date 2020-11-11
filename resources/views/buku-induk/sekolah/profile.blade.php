@@ -1,6 +1,6 @@
-@extends('buku-induk.template')
+@extends('layouts.home')
 
-@section('template')
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

@@ -1,3 +1,5 @@
+{{-- {{dd(Auth::guard('guru')->user()->foto)}} --}}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,10 +83,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('img/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('img') }}/{{Auth::user()->foto ?? Auth::guard('guru')->user()->foto}} " class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}} </a>
+          <a href="#" class="d-block">{{Auth::guard('web')->user()->name ?? Auth::guard('guru')->user()->nama}} </a>
         </div>
       </div>
 
@@ -97,7 +99,7 @@
               <p>Dashboard</p>
             </a>
           </li>
-          @if (Auth::user()->is_admin == 1)              
+          @if (Auth::user()->is_admin ?? Auth::user() == 1 )              
           <li class="nav-header">Admin Management</li>
           <li class="nav-item">
             <a href="{{ url('/profile') }}" class="nav-link">

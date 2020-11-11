@@ -9,7 +9,7 @@ class pengajuan extends Model
     //
     protected $table = 'pengajuan';
 
-    protected $fillable = ['siswa_id', 'pengajuan', 'deskripsi', 'siswa'];
+    protected $fillable = ['siswa_id', 'pengajuan', 'deskripsi', 'siswa_b'];
 
     public function siswa()
     {

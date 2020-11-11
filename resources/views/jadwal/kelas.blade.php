@@ -8,12 +8,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jadwal Kelas X</h1>
+            <h1>Detail Jadwal {{Auth::user()->kelas->kelas}} {{Auth::user()->kelas->sub_kelas}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Jadwal</a></li>
-              <li class="breadcrumb-item active">Jadwal Guru</li>
+              <li class="breadcrumb-item"><a href="#">Jadwal Kelas</a></li>
+              <li class="breadcrumb-item active">Selengkapnya</li>
             </ol>
           </div>
         </div>
@@ -27,7 +28,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Jadwal Guru</h3>
+                <h3 class="card-title">Detail Jadwal</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -44,19 +45,17 @@
                 <table class="table table-bordered">
                   <thead>                  
                     <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Nama</th>
-                      <th>NIP</th>
-                      <th style="width: 15%">Lihat Jadwal</th>
+                      <th style="width: 10px">Jam ke</th>
+                      <th>Hari</th>
+                      <th>Pelajaran</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($guru as $data)                         
+                    @foreach (Auth::user()->kelas->jadwal_kelas as $data)                        
                     <tr>
-                      <td>{{$loop->iteration}} </td>
-                      <td>{{$data->nama}} </td>
-                      <td>{{$data->nip}} </td>
-                      <td><a href="{{ url('/siswa/jadwal-guru/jadwal/'.$data->id) }}" class="badge bg-info">Lihat</a></td>
+                      <td>{{$data->jam_ke}} </td>
+                      <td>Senin</td>
+                      <td>{{$data->mapel->nama}} </td>
                     </tr>
                     @endforeach
                   </tbody>

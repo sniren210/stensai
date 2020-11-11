@@ -18,42 +18,46 @@ class JadwalKelasController extends Controller
         'confirmed' => 'password tidak cocok',
         'unique' => 'sudah ada',
         'date' => 'tanggal  harus format YY/MM/DD',
-        'numeric' => 'harus di isi angka'
+        'numeric' => 'harus di isi angka',
     ];
     protected $validasi = [
         'mapel' => ['required', 'max:255'],
         'kelas' => ['required', 'max:255'],
-        'jam_ke' => ['required','numeric', 'max:255'],
+        'jam_ke' => ['required', 'numeric', 'max:255'],
         // 'foto' => 'required|file|image|mimes:jpeg,png,jpg'
     ];
 
     public function index()
     {
         $data = [
-            'kelas' => kelas::all()
+            'kelas' => kelas::all(),
         ];
 
-        return view('jadwal.kelas.table',$data);
+        return view('jadwal.kelas.table', $data);
+    }
 
+    public function kelas()
+    {
+        return view('jadwal.kelas');
     }
 
     public function home()
     {
         $data = [
-            'kelas' => kelas::all()
+            'kelas' => kelas::all(),
         ];
 
-        return view('jadwal.kelas.kelas',$data);    
+        return view('jadwal.kelas.kelas', $data);
     }
 
     public function jadwal($jadwal)
     {
         $data = [
             'jadwal' => jadwal_kelas::where('kelas_id', $jadwal)->get(),
-            'kelas' => jadwal_kelas::where('kelas_id', $jadwal)->first()
+            'kelas' => jadwal_kelas::where('kelas_id', $jadwal)->first(),
         ];
 
-        return view('jadwal.kelas.detail',$data);
+        return view('jadwal.kelas.detail', $data);
     }
 
     /**
@@ -65,11 +69,10 @@ class JadwalKelasController extends Controller
     {
         $data = [
             'kelas' => kelas::all(),
-            'mapel' => mapel::all()
+            'mapel' => mapel::all(),
         ];
 
-        return view('jadwal.kelas.tambah',$data);
-
+        return view('jadwal.kelas.tambah', $data);
     }
 
     /**
@@ -80,7 +83,7 @@ class JadwalKelasController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
         jadwal_kelas::create([
             'mapel_id' => $request->mapel,
@@ -88,7 +91,10 @@ class JadwalKelasController extends Controller
             'jam_ke' => $request->jam_ke,
         ]);
 
-        return redirect('jadwal-kelas')->with('status', 'Jadwal kelas berhasil ditambahkan.');
+        return redirect('jadwal-kelas')->with(
+            'status',
+            'Jadwal kelas berhasil ditambahkan.'
+        );
     }
 
     /**
@@ -101,11 +107,10 @@ class JadwalKelasController extends Controller
     {
         $data = [
             'jadwal' => jadwal_kelas::where('kelas_id', $jadwal_kelas)->get(),
-            'kelas' => jadwal_kelas::where('kelas_id', $jadwal_kelas)->first()
+            'kelas' => jadwal_kelas::where('kelas_id', $jadwal_kelas)->first(),
         ];
 
-        return view('jadwal.kelas.jadwal',$data);
-
+        return view('jadwal.kelas.jadwal', $data);
     }
 
     /**
@@ -116,14 +121,13 @@ class JadwalKelasController extends Controller
      */
     public function edit($jadwal_kelas)
     {
-
         $data = [
             'kelas' => kelas::all(),
             'mapel' => mapel::all(),
-            'jadwal' => jadwal_kelas::find($jadwal_kelas)
+            'jadwal' => jadwal_kelas::find($jadwal_kelas),
         ];
 
-        return view('jadwal.kelas.edit',$data);
+        return view('jadwal.kelas.edit', $data);
     }
 
     /**
@@ -137,15 +141,18 @@ class JadwalKelasController extends Controller
     {
         $data = jadwal_kelas::find($jadwal_kelas);
 
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        jadwal_kelas::where('id',$data->id)->update([
+        jadwal_kelas::where('id', $data->id)->update([
             'mapel_id' => $request->mapel,
             'kelas_id' => $request->kelas,
             'jam_ke' => $request->jam_ke,
         ]);
 
-        return redirect('jadwal-kelas/'.$data->kelas_id)->with('status', 'Jadwal kelas berhasil diubah.');
+        return redirect('jadwal-kelas/' . $data->kelas_id)->with(
+            'status',
+            'Jadwal kelas berhasil diubah.'
+        );
     }
 
     /**
@@ -160,6 +167,9 @@ class JadwalKelasController extends Controller
 
         jadwal_kelas::destroy($data->id);
 
-        return redirect('jadwal-kelas/'.$data->kelas_id)->with('status', 'Jadwal Kelas berhasil dihapus.');
+        return redirect('jadwal-kelas/' . $data->kelas_id)->with(
+            'status',
+            'Jadwal Kelas berhasil dihapus.'
+        );
     }
 }

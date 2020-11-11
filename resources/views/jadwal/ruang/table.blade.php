@@ -45,7 +45,9 @@
 
           <div class="card">
             <div class="card-header">
+              @if (Auth::guard('web')->check())                  
               <a href="{{ url('/jadwal-ruang/create') }}" class="btn btn-primary">Tambah</a>
+              @endif
             </div>
             <!-- /.card-header -->
             <div class="card-body">

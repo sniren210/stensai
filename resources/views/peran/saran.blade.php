@@ -47,7 +47,7 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Siswa</label>
-                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="exampleInputEmail1" name="nama" value="{{old('nama')}} ">
+                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="exampleInputEmail1" name="nama" value="{{old('nama') ?? Auth::guard('siswa')->user()->nama ?? ''}} ">
                   @error('nama')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">NIS</label>
-                  <input type="text" class="form-control @error('nis') is-invalid @enderror" id="exampleInputEmail1" name="nis" value="{{old('nis')}} ">
+                  <input type="text" class="form-control @error('nis') is-invalid @enderror" id="exampleInputEmail1" name="nis" value="{{old('nis') ?? Auth::guard('siswa')->user()->nis ?? ''}} ">
                   @error('nis')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>

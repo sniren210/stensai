@@ -55,22 +55,27 @@ class SiswaController extends Controller
         return view('buku-induk.siswa.table', $data);
     }
 
-    public function home()
+    // public function home()
+    // {
+    //     $data = [
+    //         'siswa' => siswa::all(),
+    //     ];
+
+    //     return view('buku-induk.siswa.buku-induk', $data);
+    // }
+
+    // public function selengkapnya(siswa $siswa)
+    // {
+    //     $data = [
+    //         'siswa' => $siswa,
+    //     ];
+
+    //     return view('buku-induk.siswa.selengkapnya', $data);
+    // }
+
+    public function siswa()
     {
-        $data = [
-            'siswa' => siswa::all(),
-        ];
-
-        return view('buku-induk.siswa.buku-induk', $data);
-    }
-
-    public function selengkapnya(siswa $siswa)
-    {
-        $data = [
-            'siswa' => $siswa,
-        ];
-
-        return view('buku-induk.siswa.selengkapnya', $data);
+        return view('buku-induk.siswa.siswa');
     }
 
     /**

@@ -20,7 +20,9 @@
     </section>
     <div class="content my-3">
       <div class="container-fluid">
+        @if (Auth::guard('web')->check())            
         <a href="{{ url('/sekolah/edit') }}" class="btn btn-success btn-lg">Edit</a>
+        @endif
       </div>
     </div>
 

@@ -81,7 +81,7 @@ class SaranController extends Controller
             'siswa_id' => $siswa_b ? $siswa->id : false,
             'event_id' => $request->event,
             'deskripsi' => $request->deskripsi,
-            'siswa' => $siswa_b,
+            'siswa_b' => $siswa_b,
         ]);
         return redirect('peran/saran')->with(
             'status',

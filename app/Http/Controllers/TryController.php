@@ -44,6 +44,20 @@ class TryController extends Controller
         return view('try', $data);
     }
 
+    public function siswa()
+    {
+        $data = [
+            'example' => 'example',
+        ];
+
+        return view('try-siswa', $data);
+    }
+
+    public function guru()
+    {
+        return view('try-guru');
+    }
+
     public function export()
     {
         $date = date('Y-m-d,s');

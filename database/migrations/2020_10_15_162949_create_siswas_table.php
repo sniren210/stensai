@@ -16,6 +16,8 @@ class CreateSiswasTable extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->integer('nis');
             $table->integer('nisn');
             $table->string('jk');
@@ -28,6 +30,7 @@ class CreateSiswasTable extends Migration
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->integer('kelas_id');
+            $table->rememberToken();
             $table->timestamps();
 
             // $table->foreign('kelas_id')->references('id')->on('kelas');

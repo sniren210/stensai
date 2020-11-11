@@ -45,7 +45,10 @@
 
           <div class="card">
             <div class="card-header">
-              <a href="{{ url('/ruang/create') }}" class="btn btn-primary">Tambah</a>
+              @if (Auth::guard('web')->check())
+                    
+                <a href="{{ url('/ruang/create') }}" class="btn btn-primary">Tambah</a>
+              @endif
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -55,7 +58,9 @@
                   <th>No</th>
                   <th>Ruang</th>
                   <th>Jenis</th>
+                  @if (Auth::guard('web')->check())
                   <th>Aksi</th>
+                  @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -64,10 +69,12 @@
                     <td>{{$loop->iteration}} </td>
                     <td>{{$data->nmr_ruang}} </td>
                     <td>{{$data->jenis_ruang}} </td>
+                    @if (Auth::guard('web')->check())              
                     <td>
                       <a href="{{ url('/ruang/'.$data->id.'/edit') }}" class="badge badge-success">Edit</a>
                       <button type="button" class="btn badge badge-danger" data-toggle="modal" data-target="#delete{{$data->id}}">Hapus</button>
                     </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>
@@ -76,7 +83,9 @@
                   <th>No</th>
                   <th>Ruang</th>
                   <th>Jenis</th>
-                  <th>Aksi</th>
+                  @if (Auth::guard('web')->check())
+                  <th>Aksi</th>                  
+                  @endif
                 </tr>
                 </tfoot>
               </table>

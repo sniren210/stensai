@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -21,10 +22,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['password', 'password_confirmation'];
 
     /**
      * Report or log an exception.
@@ -51,5 +49,24 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated(
+        $request,
+        AuthenticationException $exception
+    ) {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        if ($request->is('siswa') || $request->is('siswa/*')) {
+            return redirect()->guest(route('siswa.login'));
+        }
+
+        // if ($request->is('guru') || $request->is('guru/*')) {
+        //     return redirect()->guest(route('guru.login'));
+        // }
+
+        return redirect()->guest(route('guru.login'));
     }
 }

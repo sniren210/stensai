@@ -18,7 +18,7 @@ class KelasController extends Controller
         'confirmed' => 'password tidak cocok',
         'unique' => 'sudah ada',
         'date' => 'tanggal  harus format YY/MM/DD',
-        'numeric' => 'harus di isi angka'
+        'numeric' => 'harus di isi angka',
     ];
     protected $validasi = [
         'kelas' => ['required', 'string', 'max:255'],
@@ -29,10 +29,15 @@ class KelasController extends Controller
     public function index()
     {
         $data = [
-            'kelas' => kelas::all()
+            'kelas' => kelas::all(),
         ];
         //
-        return view('buku-induk.kelas.kelas',$data);
+        return view('buku-induk.kelas.kelas', $data);
+    }
+
+    public function siswa()
+    {
+        return view('buku-induk.kelas.lihat-siswa');
     }
 
     public function kelas_jurusan()
@@ -41,16 +46,16 @@ class KelasController extends Controller
             'kelas' => kelas::all(),
         ];
 
-        return view('buku-induk.kelas.kelas-jurusan',$data);
+        return view('buku-induk.kelas.kelas-jurusan', $data);
     }
 
     public function lihat_siswa($kelas)
     {
         $data = [
-            'siswa' => siswa::where('kelas_id',$kelas)->get()
+            'siswa' => siswa::where('kelas_id', $kelas)->get(),
         ];
 
-        return view('buku-induk.kelas.lihat-siswa',$data);
+        return view('buku-induk.kelas.lihat-siswa', $data);
     }
 
     /**
@@ -61,10 +66,10 @@ class KelasController extends Controller
     public function create()
     {
         $data = [
-            'jurusan' => jurusan::all()
+            'jurusan' => jurusan::all(),
         ];
 
-        return view('buku-induk.kelas.tambah',$data);
+        return view('buku-induk.kelas.tambah', $data);
     }
 
     /**
@@ -76,12 +81,12 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
         kelas::create([
             'kelas' => $request->kelas,
             'sub_kelas' => $request->sub_kelas,
-            'jurusan_id' => $request->jurusan
+            'jurusan_id' => $request->jurusan,
         ]);
 
         return redirect('kelas')->with('status', 'Kelas berhasil ditambahkan.');
@@ -96,10 +101,10 @@ class KelasController extends Controller
     public function show($kelas)
     {
         $data = [
-            'siswa' => siswa::where('kelas_id',$kelas)->get()
+            'siswa' => siswa::where('kelas_id', $kelas)->get(),
         ];
 
-        return view('buku-induk.kelas.detail',$data);
+        return view('buku-induk.kelas.detail', $data);
     }
 
     /**
@@ -112,10 +117,10 @@ class KelasController extends Controller
     {
         $data = [
             'kelas' => kelas::find($kelas),
-            'jurusan' => jurusan::all()
+            'jurusan' => jurusan::all(),
         ];
 
-        return view('buku-induk.kelas.edit',$data);
+        return view('buku-induk.kelas.edit', $data);
     }
 
     /**
@@ -125,16 +130,16 @@ class KelasController extends Controller
      * @param  \App\kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$kelas)
+    public function update(Request $request, $kelas)
     {
         $data = kelas::find($kelas);
         //
-        $request->validate($this->validasi,$this->messages);
+        $request->validate($this->validasi, $this->messages);
 
-        kelas::where('id',$data->id)->update([
+        kelas::where('id', $data->id)->update([
             'kelas' => $request->kelas,
             'sub_kelas' => $request->sub_kelas,
-            'jurusan_id' => $request->jurusan
+            'jurusan_id' => $request->jurusan,
         ]);
 
         return redirect('kelas')->with('status', 'Kelas berhasil diubah.');

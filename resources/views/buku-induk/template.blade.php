@@ -14,22 +14,19 @@
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="{{ url('/buku-induk') }}" class="nav-link">Home</a>
+          <a href="{{ url('/siswa/buku-induk') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/buku-induk/siswa/home') }}" class="nav-link">Buku Induk Siswa</a>
+          <a href="{{ url('/siswa/siswa') }}" class="nav-link">Buku Induk Siswa</a>
         </li>
+        {{-- <li class="nav-item">
+          <a href="{{ url('/siswa/buku-induk/guru/home') }}" class="nav-link">Buku Induk Guru</a>
+        </li> --}}
+        {{-- <li class="nav-item">
+          <a href="{{ url('/siswa/sekolah') }}" class="nav-link">Profile Sekolah</a>
+        </li> --}}
         <li class="nav-item">
-          <a href="{{ url('/buku-induk/guru/home') }}" class="nav-link">Buku Induk Guru</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url('/sekolah') }}" class="nav-link">Profile Sekolah</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url('/kelas-jurusan') }}" class="nav-link">Kelas dan Jurusan</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url('/ruang/home') }}" class="nav-link">Ruang</a>
+          <a href="{{ url('/siswa/kelas-jurusan') }}" class="nav-link">Kelas dan Jurusan</a>
         </li>
       </ul>
     </div>

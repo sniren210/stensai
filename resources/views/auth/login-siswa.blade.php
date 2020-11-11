@@ -8,9 +8,9 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Login Admin</p>
+        <p class="login-box-msg">Login Siswa</p>
   
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('siswa.login.submit') }}">
             @csrf
           <div class="input-group mb-3">
             <input type="email" placeholder="Email"  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>

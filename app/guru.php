@@ -2,11 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class guru extends Model
+class guru extends Authenticatable
 {
     //
+    use Notifiable;
+
     protected $table = 'guru';
 
     protected $fillable = [
@@ -19,7 +22,11 @@ class guru extends Model
         'agama',
         'alamat',
         'foto',
+        'email',
+        'password',
     ];
+
+    protected $hidden = ['password', 'remember_token'];
 
     public function sekolah()
     {
@@ -30,7 +37,7 @@ class guru extends Model
     {
         return $this->belongsToMany('App\kelas', 'wali_kelas');
     }
-    
+
     // public function mapel()
     // {
     //     return $this->belongsToMany('App\mapel', 'jadwal_guru');

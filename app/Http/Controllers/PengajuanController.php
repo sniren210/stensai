@@ -75,7 +75,7 @@ class PengajuanController extends Controller
             'siswa_id' => $siswa_b ? $siswa->id : false,
             'pengajuan' => $request->pengajuan,
             'deskripsi' => $request->deskripsi,
-            'siswa' => $siswa_b,
+            'siswa_b' => $siswa_b,
         ]);
         return redirect('peran/pengajuan')->with(
             'status',

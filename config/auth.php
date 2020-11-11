@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -41,6 +40,15 @@ return [
             'provider' => 'users',
         ],
 
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'guru',
+        ],
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'siswa',
+        ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -71,6 +79,15 @@ return [
             'model' => App\User::class,
         ],
 
+        'guru' => [
+            'driver' => 'eloquent',
+            'model' => App\guru::class,
+        ],
+        'siswa' => [
+            'driver' => 'eloquent',
+            'model' => App\siswa::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -99,6 +116,19 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'siswa' => [
+            'provider' => 'siswa',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'guru' => [
+            'provider' => 'guru',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -113,5 +143,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

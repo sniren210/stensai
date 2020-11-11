@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class siswa extends Model
+class siswa extends Authenticatable
 {
     //
+    use Notifiable;
     protected $table = 'siswa';
 
     protected $fillable = [
@@ -23,7 +25,11 @@ class siswa extends Model
         'nama_ayah',
         'nama_ibu',
         'kelas_id',
+        'email',
+        'password',
     ];
+
+    protected $hidden = ['password', 'remember_token'];
 
     public function kelas()
     {
@@ -44,7 +50,7 @@ class siswa extends Model
     {
         return $this->hasMany('App\nilai_siswa', 'siswa_id');
     }
-    
+
     public function saran()
     {
         return $this->hasMany('App\saran', 'siswa_id');

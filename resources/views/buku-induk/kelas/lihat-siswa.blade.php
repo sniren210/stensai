@@ -28,7 +28,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">XI Rekayasa Perangkat Lunak</h3>
+                <h3 class="card-title">{{Auth::user()->kelas->kelas}}-{{Auth::user()->kelas->jurusan->nama}}</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -52,7 +52,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($siswa as $data)                        
+                    @foreach (Auth::user()->kelas->siswa as $data)                        
                     <tr>
                       <td>{{$loop->iteration}} </td>
                       <td>{{$data->nama}} </td>

@@ -48,6 +48,11 @@ class NilaiSiswaController extends Controller
 
         return view('buku-induk.nilai.nilai', $data);
     }
+
+    public function siswa()
+    {
+        return view('buku-induk.nilai.nilai');
+    }
     /**
      * Show the form for creating a new resource.
      *
