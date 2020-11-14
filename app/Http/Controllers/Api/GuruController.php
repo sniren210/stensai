@@ -7,6 +7,7 @@ use App\guru;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Guru as GuruResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class GuruController extends BaseController
@@ -20,6 +21,26 @@ class GuruController extends BaseController
             GuruResource::collection($data),
             'Guru berhasil diambil'
         );
+    }
+
+    public function login(Request $request)
+    {
+        // Validate form data
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+
+        // Attempt to log the user in
+        if (
+            Auth::guard('guru')->attempt(
+                ['email' => $request->email, 'password' => $request->password],
+                $request->remember
+            )
+        ) {
+            return $this->sendResponse(Auth::guard('guru')->user(), 'Guru berhasil login');
+        }
+        return $this->sendError('Guru Gagal login');
     }
 
     /**

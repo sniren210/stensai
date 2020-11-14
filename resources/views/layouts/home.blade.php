@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <nav class="main-header navbar navbar-expand-md navbar-dark navbar-black">
     <div class="container">
       <a href="/" class="navbar-brand">
-        <img src="{{ asset('') }}dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('') }}img/logo-mini.png" alt="Stensai Logo" class="brand-image img-circle img-round"
              style="opacity: .8">
         <span class="brand-text font-weight-dark">{{config('app.name')}} </span>
       </a>

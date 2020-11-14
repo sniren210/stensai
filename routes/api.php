@@ -30,10 +30,12 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('siswa', 'Api\SiswaController');
+    Route::post('siswa/login', 'API\SiswaController@login');
     Route::resource('jurusan', 'Api\JurusanController');
     Route::resource('ajuan', 'Api\AjuanController');
     Route::resource('event', 'Api\EventController');
     Route::resource('guru', 'Api\GuruController');
+    Route::post('guru/login', 'API\GuruController@login');
     Route::resource('jadwal-kelas', 'Api\JadwalKelasController');
     Route::resource('jadwal-guru', 'Api\JadwalGuruController');
     Route::resource('jadwal-ruang', 'Api\JadwalRuangController');

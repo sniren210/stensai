@@ -7,18 +7,18 @@ use App\pengajuan;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Pengajuan as pengajuanResource;
+use Illuminate\Support\Facades\DB;
 
 class PengajuanController extends BaseController
 {
     public function index()
     {
         //
-        $data = pengajuan::all();
+        $data = DB::table('pengajuan')
+            ->join('siswa', 'siswa.id', '=', 'pengajuan.siswa_id')
+            ->get();
 
-        return $this->sendResponse(
-            pengajuanResource::collection($data),
-            'pengajuan berhasil diambil'
-        );
+        return $this->sendResponse($data, 'pengajuan berhasil diambil');
     }
 
     /**

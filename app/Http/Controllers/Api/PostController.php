@@ -7,6 +7,7 @@ use App\post;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Post as PostResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends BaseController
@@ -14,12 +15,11 @@ class PostController extends BaseController
     public function index()
     {
         //
-        $data = Post::all();
-
-        return $this->sendResponse(
-            PostResource::collection($data),
-            'Post berhasil diambil'
-        );
+        $data = DB::table('post')
+            ->join('users', 'users.id', '=', 'post.user_id')
+            ->join('kategori_post', 'kategori_post.id', '=', 'post.kategori_id')
+            ->get();
+        return $this->sendResponse($data, 'Post berhasil diambil');
     }
 
     /**

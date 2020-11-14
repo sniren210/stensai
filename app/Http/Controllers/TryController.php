@@ -20,6 +20,7 @@ use App\sekolah;
 use App\siswa;
 use Barryvdh\DomPDF\Facade as PDF;
 use Barryvdh\DomPDF\ServiceProvider as SP;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TryController extends Controller
@@ -40,7 +41,20 @@ class TryController extends Controller
             'kelas' => kelas::all(),
             'mapel' => mapel::all(),
             'sekolah' => sekolah::all(),
+            'saran' => saran::all(),
         ];
+        $saran = saran::all();
+        dump($saran);
+        foreach ($saran as $dat) {
+            // dump($dat->siswa);
+        }
+        dump($dat->siswa);
+        $join = DB::table('saran')
+            ->join('siswa', 'siswa.id', '=', 'saran.siswa_id')
+            ->join('event', 'event.id', '=', 'saran.event_id')
+            ->get();
+        dump($join);
+        die();
         return view('try', $data);
     }
 

@@ -211,7 +211,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => ['auth:guru' or 'auth']], function () {
     // try
-    Route::get('/try', 'TryController@guru');
+    // Route::get('/try', 'TryController@guru');
 
     Route::get('/dashboard', 'HomeController@dashboard')->name(
         'guru.dashboard'

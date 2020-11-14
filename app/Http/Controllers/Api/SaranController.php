@@ -7,6 +7,7 @@ use App\saran;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Saran as SaranResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class SaranController extends BaseController
@@ -14,12 +15,13 @@ class SaranController extends BaseController
     public function index()
     {
         //
-        $data = Saran::all();
+        $data = DB::table('saran')
+            ->join('siswa', 'siswa.id', '=', 'saran.siswa_id')
+            ->join('event', 'event.id', '=', 'saran.event_id')
+            ->get();
 
-        return $this->sendResponse(
-            SaranResource::collection($data),
-            'Saran berhasil diambil'
-        );
+        return $this->sendResponse($data, 'Saran berhasil diambil');
+        // SaranResource::collection($data)
     }
 
     /**

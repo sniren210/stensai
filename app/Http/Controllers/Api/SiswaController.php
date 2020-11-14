@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Siswa as SiswaResource;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends BaseController
 {
@@ -19,6 +20,26 @@ class SiswaController extends BaseController
             SiswaResource::collection($data),
             'Siswa berhasil diambil'
         );
+    }
+
+    public function login(Request $request)
+    {
+        // Validate form data
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+
+        // Attempt to log the user in
+        if (
+            Auth::guard('siswa')->attempt(
+                ['email' => $request->email, 'password' => $request->password],
+                $request->remember
+            )
+        ) {
+            return $this->sendResponse(Auth::guard('siswa')->user(), 'Siswa berhasil login');
+        }
+        return $this->sendError('Siswa Gagal login');
     }
 
     /**
