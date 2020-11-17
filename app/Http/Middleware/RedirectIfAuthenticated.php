@@ -23,12 +23,12 @@ class RedirectIfAuthenticated
         }
 
         if ($guard == "guru" && Auth::guard($guard)->check()) {
-            return redirect()->route('guru.dashboard');
+            return redirect()->route('home');
         }
 
-        if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
-        }
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
 
         return $next($request);
     }

@@ -209,7 +209,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/kelas', 'KelasController');
 });
 
-Route::group(['middleware' => ['auth:guru' or 'auth']], function () {
+Route::group(['middleware' => 'is_guru' ], function () {
     // try
     // Route::get('/try', 'TryController@guru');
 
@@ -218,12 +218,14 @@ Route::group(['middleware' => ['auth:guru' or 'auth']], function () {
     );
 
     // mading
-    Route::resource('mading', 'PostController');
+    Route::resource('mading', 'PostController',[
+        'except' => ['store', 'edit', 'update', 'delete', 'create'],
+    ]);
 
     // ajuan
     Route::get('/ajuan', 'AjuanController@index');
     Route::get('/ajuan/detail/{ajuan}', 'AjuanController@show');
-    Route::post('/ajuan/publish/{ajuan}', 'AjuanController@publish');
+    // Route::post('/ajuan/publish/{ajuan}', 'AjuanController@publish');
 
     // peran
     Route::get('/saran/table', 'SaranController@index');
@@ -314,6 +316,8 @@ Route::get('/login-guru', 'Auth\GuruLoginController@showLoginForm')->name(
 Route::post('/login-guru', 'Auth\GuruLoginController@login')->name(
     'guru.login.submit'
 );
+
+// Route::post('/logout', 'Auth\SiswaLoginController@logout')->name('logout');
 
 // Route::prefix('guru')->group(function () {
 //     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');

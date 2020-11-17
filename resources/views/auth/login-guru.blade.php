@@ -9,6 +9,13 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Login Guru</p>
+        @if (session('status'))
+          <div class="content">
+            <div class="alert alert-success" style="color: #571515; background-color: #edd4d4;border-color: #e6c3c3;">
+              {{ session('status') }}
+            </div>
+          </div>
+        @endif
   
         <form method="POST" action="{{ route('guru.login.submit') }}">
             @csrf
@@ -39,14 +46,14 @@
             @enderror
           </div>
           <div class="row">
-            <div class="col-8">
+            {{-- <div class="col-8">
               <div class="icheck-primary">
                 <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember">
                   Remember Me
                 </label>
               </div>
-            </div>
+            </div> --}}
             <!-- /.col -->
             <div class="col-4">
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>

@@ -63,7 +63,9 @@
                     <td>{{$data->tanggal}}</td>
                     <td>
                       <a href="{{ url('/ajuan/detail/'.$data->id) }}" class="badge badge-info">Detail</a>
+                      @if (Auth::guard('web')->check())                          
                       <button type="button" class="btn badge badge-success" data-toggle="modal" data-target="#publish{{$data->id}}">Publish</button>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

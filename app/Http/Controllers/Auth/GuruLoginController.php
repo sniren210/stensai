@@ -39,6 +39,9 @@ class GuruLoginController extends Controller
         // if unsuccessful
         return redirect()
             ->back()
-            ->withInput($request->only('email', 'remember'));
+            ->with(
+                'status',
+                'Password atau email salah.'
+            );
     }
 }
