@@ -23,7 +23,7 @@ class AjuanController extends Controller
         'nama' => ['required', 'string', 'max:255'],
         'judul' => ['required', 'string', 'max:255'],
         'kategori' => ['required', 'string', 'max:255'],
-        'deskripsi' => ['required', 'string', 'min:8'],
+        'deskripsi' => ['required', 'string', 'min:8','max:255'],
         'thumbnail' => 'required|file|image|mimes:jpeg,png,jpg',
     ];
 

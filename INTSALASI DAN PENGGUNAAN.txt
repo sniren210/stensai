@@ -1,0 +1,17 @@
+website installasi dan penggunaan
+
+installasi
+
+cd stensai-apps di cmd
+ketik "composer install"
+ketik "php artisan key:generate"
+rename file .env.example menjadi .env
+ketik "php artisan migrate"
+ketik "php artisa db:seed"
+ketik "php artisan serve"
+buka browser dan ketikan "localhost:8000"
+
+penggunaan
+
+buka browser yang di inginkan
+akses website "stensai-apps.com"

@@ -22,7 +22,7 @@ class PostController extends Controller
     protected $validasi = [
         'judul' => ['required', 'string', 'max:255'],
         'kategori' => ['required', 'string', 'max:255'],
-        'deskripsi' => ['required', 'string', 'min:8'],
+        'deskripsi' => ['required', 'string', 'min:8','max:255'],
         'thumbnail' => 'required|file|image|mimes:jpeg,png,jpg',
     ];
     /**
@@ -225,7 +225,7 @@ class PostController extends Controller
     {
         $data = post::find($post);
 
-        if ($data->thumbnail->originalName != 'thumbnail-default.png') {
+        if ($data->thumbnail != 'thumbnail-default.png') {
             File::delete('img/thumbnail/' . $data->thumbnail);
         }
 

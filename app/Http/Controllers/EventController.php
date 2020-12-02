@@ -19,7 +19,7 @@ class EventController extends Controller
     ];
     protected $validasi = [
         'nama' => ['required', 'string', 'max:255'],
-        'deskripsi' => ['required', 'string', 'min:8'],
+        'deskripsi' => ['required', 'string', 'min:8','max:255'],
         'foto' => 'required|file|image|mimes:jpeg,png,jpg',
     ];
 
